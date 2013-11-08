@@ -7,6 +7,10 @@ from sqlalchemy import (
     Integer,
     Text,
     )
+import sqlalchemy as sa
+from webhelpers.text import urlify #<- will generate slugs
+from webhelpers.paginate import PageURL_WebOb, Page #<- provides pagination
+from webhelpers.date import time_ago_in_words #<- human friendly dates
 
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -15,6 +19,7 @@ from sqlalchemy.orm import (
     sessionmaker,
     )
 
+import datetime
 from zope.sqlalchemy import ZopeTransactionExtension
 
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
@@ -59,29 +64,29 @@ class Product(Base):
     description = Column(Text)
     meta_keywords = Column(String(255), unique=True) # Comma-delimited set of SEO keywords for keywords meta tag')
     meta_description = Column(String(255), unique=True) # Content for description meta tag
-    created_at = Column(Date)
-    updated_at = Column(Date)
+    created_at = Column(Date,default=datetime.datetime.utcnow)
+    updated_at = Column(Date, default=datetime.datetime.utcnow)
     product_picture = Column(String(255))
 
-    def __init__(self, name, slug, brand, sku, price, old_price, is_active, is_bestseller, is_featured, quantity, description,
-                 meta_keywords, meta_description, created_at, update_at, product_picture):
-        self.name = name
-        self.slug = slug
-        self.brand = brand
-        self.sku = sku
-        self.price = price
-        self.old_price =old_price
-        self.is_active = is_active
-        self.is_bestseller = is_bestseller
-        self.is_featured = is_featured
-        self.quantity = quantity
-        self.description = description
-        self.meta_keywords = meta_keywords
-        self.meta_description = meta_description
-        self.created_at = created_at
-        self.updated_at = update_at
-        self.product_picture = product_picture
+    @classmethod
+    def all(cls):
+        return DBSession.query(Product).order_by(sa.desc(Product.created_at))
+
+    @classmethod
+    def by_id(cls, id):
+        return DBSession.query(Product).filter(Product.id == id).first()
+
+    @property
+    def slug(self):
+        return urlify(self.name)
+
+    @property
+    def created_in_words(self):
+        return time_ago_in_words(self.created)
+
+    @classmethod
+    def get_paginator(cls, request, page=1):
+        page_url = PageURL_WebOb(request)
+        return Page(Product.all(), page, url=page_url, items_per_page=5)
 
 
-
-#Index('my_index', MyModel.name, unique=True, mysql_length=255)
