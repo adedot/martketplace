@@ -3,7 +3,7 @@
 
 <div class="span5"> <!--  Content-->
     <div class="input-group">
-        <form action="${request.route_url('product_action',action=action)}" method="post">
+        <form action="${request.route_url('product_action',action=action)}" method="post" enctype='multipart/form-data'>
             %if action =='edit':
             ${form.id()}
             %endif

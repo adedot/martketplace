@@ -3,6 +3,7 @@ from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 from pyramid.renderers import get_renderer
 from forms import ProductAddForm, SearchForm, ProductUpdateForm
+import os
 
 from sqlalchemy.exc import DBAPIError
 
@@ -31,7 +32,23 @@ class ProductViews(object):
         product = Product()
         form = ProductAddForm(self.request.POST)
         if self.request.method =="POST" and form.validate():
+
+            if form.product_picture.data:
+                print self.request
+                image_data = self.request.FILES[form.product_picture.name].read()
+                # Create new image file
+                settings = self.request.registry.settings
+
+                picture_directory = str(settings['picture_directory']).strip("\"")
+
+                image_file = os.path.join(picture_directory, form.product_picture.name)
+
+
+                # write image data to image file
+                open(image_file, 'w').write(image_data)
+
             form.populate_obj(product)
+            print product.product_picture
             DBSession.add(product)
             return HTTPFound(location=self.request.route_url('home'))
         return {'form':form, 'title':"Add Product",'action':self.request.matchdict.get('action')}
@@ -44,6 +61,19 @@ class ProductViews(object):
             return HTTPNotFound()
         return {'title': "View Product", 'product':product}
 
+    def write_picture_to_file(self, form, product):
+        # Create new image file
+        settings = self.request.registry.settings
+        picture_directory = str(settings['picture_directory']).strip("\"")
+        image_file = os.path.join(picture_directory, form.product_picture.data.filename)
+        # write image data to image file
+        destination = open(image_file, 'wb+')
+        for line in form.product_picture.data.file:
+            destination.write(line)
+        destination.close()
+        form.product_picture.data = image_file
+        product.product_picture = form.product_picture.data
+
     @view_config(route_name='product_action', match_param='action=edit', renderer='marketplace:templates/productaddedit.mako')
     def product_edit(self):
         id = int(self.request.params.get('id', -1))
@@ -54,7 +84,14 @@ class ProductViews(object):
         if not product:
             return HTTPNotFound()
         form = ProductUpdateForm(self.request.POST, product)
+
+
         if self.request.method == 'POST' and form.validate():
+
+            if form.product_picture.data.filename:
+
+                self.write_picture_to_file(form, product)
+
             form.populate_obj(product)
             return HTTPFound(location=self.request.route_url('product', id=product.id,
                                                         slug=product.slug))

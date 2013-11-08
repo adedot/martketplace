@@ -56,7 +56,7 @@ class Product(Base):
     brand = Column(String(50))
     sku = Column(String(50))
     price = Column(DECIMAL(precision=9,scale=2))
-    old_price =  Column("old_price", DECIMAL(precision=9,scale=2),default=0.00)
+    old_price = Column("old_price", DECIMAL(precision=9,scale=2),default=0.00)
     is_active = Column(Boolean,default=True)
     is_bestseller = Column(Boolean,default=False)
     is_featured = Column(Boolean,default=False)
@@ -80,9 +80,6 @@ class Product(Base):
     def slug(self):
         return urlify(self.name)
 
-    @property
-    def created_in_words(self):
-        return time_ago_in_words(self.created)
 
     @classmethod
     def get_paginator(cls, request, page=1):
