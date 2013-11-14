@@ -2,16 +2,18 @@ from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 from pyramid.renderers import get_renderer
-from forms import ProductAddForm, SearchForm, ProductUpdateForm
+from marketplace.forms import ProductAddForm, SearchForm, ProductUpdateForm, AddProductToCartForm
 import os
+
+from marketplace.utils import cart
 
 from sqlalchemy.exc import DBAPIError
 
-from .models import (
-    DBSession,
-    Product
+from marketplace.models import (
+    DBSession
     )
 
+from marketplace.models.product import Product
 
 class ProductViews(object):
     def __init__(self, request):
@@ -34,18 +36,7 @@ class ProductViews(object):
         if self.request.method =="POST" and form.validate():
 
             if form.product_picture.data:
-                print self.request
-                image_data = self.request.FILES[form.product_picture.name].read()
-                # Create new image file
-                settings = self.request.registry.settings
-
-                picture_directory = str(settings['picture_directory']).strip("\"")
-
-                image_file = os.path.join(picture_directory, form.product_picture.name)
-
-
-                # write image data to image file
-                open(image_file, 'w').write(image_data)
+                self.write_picture_to_file(form, product)
 
             form.populate_obj(product)
             print product.product_picture
@@ -59,6 +50,22 @@ class ProductViews(object):
         product = Product.by_id(id)
         if not product:
             return HTTPNotFound()
+
+        form = AddProductToCartForm(self.request.POST)
+
+
+
+        if self.request.method =="POST" and form.validate():
+            print "The number of items added is", form.quantity.data
+
+            session = self.request.session
+            cart.add_to_cart(self.request, product)
+
+            #
+            # show cart url
+        else:
+            form = AddProductToCartForm()
+
         return {'title': "View Product", 'product':product}
 
     def write_picture_to_file(self, form, product):
@@ -77,14 +84,11 @@ class ProductViews(object):
     @view_config(route_name='product_action', match_param='action=edit', renderer='marketplace:templates/productaddedit.mako')
     def product_edit(self):
         id = int(self.request.params.get('id', -1))
-        print "Id is", id
         product = Product.by_id(id)
 
-        print product.name
         if not product:
             return HTTPNotFound()
         form = ProductUpdateForm(self.request.POST, product)
-
 
         if self.request.method == 'POST' and form.validate():
 
@@ -99,4 +103,9 @@ class ProductViews(object):
 
     @view_config(route_name='product_action', match_param='action=search', renderer='marketplace:templates/search.mako')
     def product_search(self):
-        pass
+
+        products = Product.all()
+
+        form = SearchForm()
+
+        return {'form':form, 'title': "Search", 'products' :products }

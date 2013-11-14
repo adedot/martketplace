@@ -2,7 +2,7 @@ from wtforms import Form, TextField, DecimalField, FileField, IntegerField, Bool
 from wtforms.ext.appengine.db import model_form
 from wtforms.validators import Required
 from wtforms import validators
-from models import Product
+from marketplace.models.product import Product
 import re
 
 # used to remove all the whitespace from
@@ -40,8 +40,12 @@ class ProductUpdateForm(ProductAddForm):
     id = HiddenField()
 
 
+class AddProductToCartForm(Form):
+	quantity = IntegerField('quantity', [Required()])
+
+
 class CartForm(Form):
-	pass
+    pass
 
 class CheckoutForm(Form):
 	pass

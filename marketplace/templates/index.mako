@@ -4,7 +4,7 @@
 
 <div class="span8"> <!--  Content-->
     <div class="input-group">
-        <form action="${request.application_url}/search" method="post" name="search">
+        <form action="${request.route_url('product_action',action='search')}" method="post" name="search">
             <input type="search" name="query" class="form-control">
             <span class="input-group-btn">
                 <input class="btn btn-default" type="submit" value="Search" />
@@ -17,7 +17,9 @@
     <p>Featured Items</p>
     <ul class="nav nav-pills nav-stacked">
      % for product in products:
-   <li> <p>Name: <b>${product.name}</b></p>
+   <li> <p><b>${product.name}</b> <a href="${request.route_url('product', id=product.id, slug=product.slug)}">
+   <img src="${product.product_picture}" height="100" width="200" />
+   </a></p>
     </li>
     % endfor
     </ul>

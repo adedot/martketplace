@@ -1,7 +1,6 @@
 <!-- extend home base layout -->
-{% extends "home_base.html" %}
+<%inherit file="marketplace:templates/layout.mako"/>
 
-{% block content %}
 <div class="span8"> <!--  Content-->
     <div class="input-group">
         <form action="/search" method="post" name="search">
@@ -16,10 +15,9 @@
 <div class="span5"> 
     <p>Product Results</p>
     <ul class="nav nav-pills nav-stacked">
-    {% for product in products %}
-    <li> <p>Name: <b>{{product.name}}</b></p></li>
-    {% endfor %}
+    % for product in products:
+    <li> <p>Name: <b>${product.name}</b></p></li>
+    % endfor
     </ul>
 </div>
 
-{% endblock %}

@@ -8,8 +8,6 @@
     <title>${title}</title>
     <more metal:define-slot="head-more"></more>
 
-
-
     <link rel="stylesheet"
           href="${request.static_url('marketplace:static/bootstrap/css/bootstrap-responsive.css')}" />
      <link rel="stylesheet"
@@ -20,25 +18,20 @@
 <body>
  <div id="main" class="container">
 
-  <div class="masthead">
-  <h1>The Baker's World Store</h1>
-  <div class="navbar">
-    
-    <div class="navbar-inner">
+      <div class="header">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="${request.route_url('home')}">Home</a></li>
 
-      <ul class="nav">
-      	
-      	<li></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">New Products</a></li>
         <li><a href="#">My Account</a></li>
         <li><a href="#">Shopping Cart</a></li>
         <li><a href="#">Checkout</a></li>
-      </ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="text-muted">Okada Marketplace</h3>
+      </div>
 
-    </div>
-    </div>
-  </div>
+
 
   <div class="row">
          <div class="span4">
