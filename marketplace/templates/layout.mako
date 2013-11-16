@@ -20,13 +20,11 @@
 
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="${request.route_url('home')}">Home</a></li>
+          <li><a href="${request.route_url('home')}">Home</a></li>
 
         <li><a href="#">My Account</a></li>
-        <li><a href="#">Shopping Cart</a></li>
+        <li><a href="${request.route_url('cart')}">Shopping Cart</a></li>
         <li><a href="#">Checkout</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
         </ul>
         <h3 class="text-muted">Okada Marketplace</h3>
       </div>

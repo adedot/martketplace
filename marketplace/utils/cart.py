@@ -31,8 +31,37 @@ def _generate_cart_id():
 
 def get_cart_items(request):
     """ return all items from the current user's cart """
+    return DBSession.query(CartItem).filter(CartItem.cart_id ==_cart_id(request))
 
-    return  DBSession.query(CartItem).filter(CartItem.cart_id ==_cart_id(request))
+def get_single_item(request, item_id):
+    return DBSession.query(CartItem).filter(CartItem.cart_id ==_cart_id(request)).first()
+
+# update quantity for single item
+def update_cart(request):
+    """ function takes a POST request that updates the quantity for single product instance in the
+    current customer's shopping cart
+
+    """
+    postdata = request.POST.copy()
+    item_id = postdata['item_id']
+    quantity = postdata['quantity']
+    cart_item = get_single_item(request, item_id)
+    if cart_item:
+        if int(quantity) > 0:
+            cart_item.quantity = int(quantity)
+        else:
+            remove_from_cart(request)
+
+# remove a single item from cart
+def remove_from_cart(request):
+    """ function that takes a POST request removes a single product instance from the current customer's
+    shopping cart
+    """
+    postdata = request.POST.copy()
+    item_id = postdata['item_id']
+    cart_item = get_single_item(request, item_id)
+    if cart_item:
+        cart_item.delete()
 
 def add_to_cart(request, product):
     """ function that takes a POST request and adds a product instance to the current customer's shopping cart """
@@ -46,16 +75,61 @@ def add_to_cart(request, product):
     #get products in cart
     cart_products = get_cart_items(request)
 
+
+
     product_in_cart = False
     # check to see if item is already in cart
     for cart_item in cart_products:
+        print "cart item is in cart"
         if cart_item.product.id == product.id:
             # update the quantity if found
+            print "We are updating the quantity"
             cart_item.augment_quantity(quantity)
             product_in_cart = True
     if not product_in_cart:
-        # create and save a new cart item
+        # create and save a new cart item\
+        print "Creating and saving new cart item"
         ci = CartItem()
         ci.product = product
         ci.quantity = quantity
         ci.cart_id = _cart_id(request)
+
+def cart_subtotal(request):
+    """ gets the subtotal for the current shopping cart """
+    cart_total = decimal.Decimal('0.00')
+    cart_products = get_cart_items(request)
+    print "The products are ", cart_products.count()
+    for cart_item in cart_products:
+
+        print cart_item.product.price
+        cart_total += cart_item.product.price * cart_item.quantity
+    return cart_total
+
+# returns the total number of items in the user's cart
+def cart_distinct_item_count(request):
+    return get_cart_items(request).count()
+
+def is_empty(request):
+    return cart_distinct_item_count(request) == 0
+
+def empty_cart(request):
+    """ empties the shopping cart of the current customer """
+    user_cart = get_cart_items(request)
+    user_cart.delete()
+
+#def remove_old_cart_items():
+#    """ 1. calculate date of 90 days ago (or session lifespan)
+#    2. create a list of cart IDs that haven't been modified
+#    3. delete those CartItem instances
+#
+#    """
+#    print "Removing old carts"
+#    remove_before = datetime.now() + timedelta(days=-settings.SESSION_COOKIE_DAYS)
+#    cart_ids = []
+#    old_items = CartItem.objects.values('cart_id').annotate(last_change=Max('date_added')).filter(last_change__lt=remove_before).order_by()
+#    for item in old_items:
+#        cart_ids.append(item['cart_id'])
+#    to_remove = CartItem.objects.filter(cart_id__in=cart_ids)
+#    to_remove.delete()
+#    print str(len(cart_ids)) + " carts were removed"
+

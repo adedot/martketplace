@@ -53,16 +53,14 @@ class ProductViews(object):
 
         form = AddProductToCartForm(self.request.POST)
 
-
-
         if self.request.method =="POST" and form.validate():
             print "The number of items added is", form.quantity.data
 
             session = self.request.session
             cart.add_to_cart(self.request, product)
 
-            #
             # show cart url
+            return HTTPFound(location=self.request.route_url('cart'))
         else:
             form = AddProductToCartForm()
 

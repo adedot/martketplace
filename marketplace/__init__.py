@@ -40,7 +40,9 @@ def main(global_config, **settings):
     config.add_route('product_action', '/product/{action}')
 
     # Cart Routes
-    config.add_route('cart_action', '/cart/{action}')
+    config.add_route('cart', '/cart')
+
+
 
     # Sign authorization - added later
     config.add_route('auth', '/sign/{action}')
