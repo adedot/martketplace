@@ -2,7 +2,6 @@ from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 from pyramid.renderers import get_renderer
-from marketplace.forms import UpdateCartForm, RemoveCartForm
 import os
 from marketplace.utils import cart
 
@@ -22,7 +21,6 @@ class CartViews(object):
         #Use base layout
         renderer = get_renderer("marketplace:templates/layout.mako")
 
-
     @view_config(route_name='cart', renderer='marketplace:templates/cart.mako')
     def show_cart(self):
 
@@ -30,10 +28,7 @@ class CartViews(object):
 
         if request.method == 'POST':
             postdata = request.POST.copy()
-            print postdata
-            print "We are in post data"
             if postdata['submit'] == 'Remove':
-                print "Removing from cart"
                 cart.remove_from_cart(request)
             if postdata['submit'] == 'Update':
                 cart.update_cart(request)
@@ -41,9 +36,14 @@ class CartViews(object):
         #        checkout_url = checkout.get_checkout_url(request)
         #        return HTTPFound(checkout_url)
 
-        cart_items = cart.get_cart_items(request)
-        page_title = 'Shopping Cart'
-        cart_subtotal = cart.cart_subtotal(request)
 
-        return {'title': page_title, 'cart_items' :cart_items, "card_subtotal": cart_subtotal }
+        cart_subtotal = cart.cart_subtotal(request)
+        print "Subtotal is ", cart_subtotal
+
+        cart_items = cart.get_cart_items(request)
+
+        print "The number of items is ",  cart_items.count()
+        page_title = 'Shopping Cart'
+
+        return {'title': page_title, 'cart_items':cart_items, 'cart_subtotal': cart_subtotal }
 

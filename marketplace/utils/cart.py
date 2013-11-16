@@ -101,11 +101,14 @@ def cart_subtotal(request):
     """ gets the subtotal for the current shopping cart """
     cart_total = decimal.Decimal('0.00')
     cart_products = get_cart_items(request)
-    print "The products are ", cart_products.count()
-    for cart_item in cart_products:
 
+    print "The number of products is", cart_products.count()
+
+    print "The products are ", [x.product for x in cart_products]
+    for cart_item in cart_products:
+        print "I am here", cart_item.product.id
         print cart_item.product.price
-        cart_total += cart_item.product.price * cart_item.quantity
+        cart_total = cart_total + (cart_item.product.price * cart_item.quantity)
     return cart_total
 
 # returns the total number of items in the user's cart

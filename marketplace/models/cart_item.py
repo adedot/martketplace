@@ -13,7 +13,7 @@ class CartItem(Base):
     cart_id = Column(String(50), primary_key=True)
     date_added = Column(Date, default=datetime.datetime.utcnow())
     quantity = Column(Integer)
-    product_id = Column(Integer, ForeignKey('product.id'))
+    product_id = Column(Integer,  ForeignKey('product.id'),primary_key=True)
     product = relationship('Product', backref="cart_items") # Cart can have many products
 
     @property
