@@ -48,7 +48,7 @@
 					</td>
 					<td>${ item.product.price }</td>
 					<td class="right">
-						<form method="post" action="." class="cart">
+						<form method="post" action="${request.route_url('cart')}" class="cart">
 							<label for="quantity">Quantity:</label>
 							<input type="text" name="quantity" value="${ item.quantity }" id="quantity" size="2" class="quantity" maxlength="5" />
 							<input type="hidden" name="item_id" value="${ item.product.id }" />
@@ -58,7 +58,7 @@
 						</form>
 					</td>
 					<td>
-						<form method="post" action="." class="cart">
+						<form method="post" action="${request.route_url('cart')}" class="cart">
 							<input type="hidden" name="item_id" value="${ item.product.id }" />
 							<input type="submit" name="submit" value="Remove"/>
 						</form>

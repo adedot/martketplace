@@ -2,7 +2,7 @@ from pyramid.response import Response
 from pyramid.view import view_config
 from pyramid.httpexceptions import HTTPNotFound, HTTPFound
 from pyramid.renderers import get_renderer
-from marketplace.forms import ProductAddForm, SearchForm, ProductUpdateForm, AddProductToCartForm
+from marketplace.forms import UpdateCartForm, RemoveCartForm
 import os
 from marketplace.utils import cart
 
@@ -30,7 +30,10 @@ class CartViews(object):
 
         if request.method == 'POST':
             postdata = request.POST.copy()
+            print postdata
+            print "We are in post data"
             if postdata['submit'] == 'Remove':
+                print "Removing from cart"
                 cart.remove_from_cart(request)
             if postdata['submit'] == 'Update':
                 cart.update_cart(request)

@@ -44,9 +44,6 @@ class AddProductToCartForm(Form):
 	quantity = IntegerField('quantity', [Required()])
 
 
-class CartForm(Form):
-    pass
-
 class CheckoutForm(Form):
 	pass
 

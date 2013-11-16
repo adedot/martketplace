@@ -34,7 +34,7 @@ def get_cart_items(request):
     return DBSession.query(CartItem).filter(CartItem.cart_id ==_cart_id(request))
 
 def get_single_item(request, item_id):
-    return DBSession.query(CartItem).filter(CartItem.cart_id ==_cart_id(request)).first()
+    return DBSession.query(CartItem).filter(CartItem.cart_id ==_cart_id(request), CartItem.product_id == item_id)
 
 # update quantity for single item
 def update_cart(request):
@@ -47,8 +47,11 @@ def update_cart(request):
     quantity = postdata['quantity']
     cart_item = get_single_item(request, item_id)
     if cart_item:
+        print "Update item", item_id
+        print "quantity:", quantity
         if int(quantity) > 0:
-            cart_item.quantity = int(quantity)
+            cart_item.update({"quantity":quantity})
+            #cart_item.quantity = int(quantity)
         else:
             remove_from_cart(request)
 
@@ -59,6 +62,7 @@ def remove_from_cart(request):
     """
     postdata = request.POST.copy()
     item_id = postdata['item_id']
+
     cart_item = get_single_item(request, item_id)
     if cart_item:
         cart_item.delete()
@@ -74,7 +78,6 @@ def add_to_cart(request, product):
 
     #get products in cart
     cart_products = get_cart_items(request)
-
 
 
     product_in_cart = False
