@@ -1,9 +1,6 @@
+__author__ = 'owner'
 from wtforms import Form, TextField, DecimalField, FileField, IntegerField, BooleanField, HiddenField
-from wtforms.ext.appengine.db import model_form
-from wtforms.validators import Required
-from wtforms import validators
-from marketplace.models.product import Product
-import re
+from marketplace.forms import *
 
 # used to remove all the whitespace from
 # the beginning and end of our input
@@ -42,11 +39,3 @@ class ProductUpdateForm(ProductAddForm):
 
 class AddProductToCartForm(Form):
 	quantity = IntegerField('quantity', [Required()])
-
-
-class CheckoutForm(Form):
-	pass
-
-class BillingForm(Form):
-	pass
-

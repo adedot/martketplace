@@ -1,13 +1,9 @@
 from pyramid.response import Response
-from pyramid.view import view_config
-from pyramid.httpexceptions import HTTPNotFound, HTTPFound
-from pyramid.renderers import get_renderer
-from marketplace.forms import ProductAddForm, SearchForm, ProductUpdateForm, AddProductToCartForm
+from marketplace.views import *
+from marketplace.forms.product import ProductAddForm, SearchForm, ProductUpdateForm, AddProductToCartForm
 import os
 
 from marketplace.utils import cart
-
-from sqlalchemy.exc import DBAPIError
 
 from marketplace.models import (
     DBSession

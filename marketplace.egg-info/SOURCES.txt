@@ -20,6 +20,7 @@ marketplace.egg-info/top_level.txt
 marketplace/models/__init__.py
 marketplace/models/cart_item.py
 marketplace/models/category.py
+marketplace/models/checkout.py
 marketplace/models/product.py
 marketplace/scripts/__init__.py
 marketplace/scripts/initializedb.py
@@ -54,4 +55,5 @@ marketplace/utils/__init__.py
 marketplace/utils/cart.py
 marketplace/views/__init__.py
 marketplace/views/cart.py
+marketplace/views/checkout.py
 marketplace/views/product.py

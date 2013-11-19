@@ -1,16 +1,5 @@
-from pyramid.response import Response
-from pyramid.view import view_config
-from pyramid.httpexceptions import HTTPNotFound, HTTPFound
-from pyramid.renderers import get_renderer
-import os
+from marketplace.views import *
 from marketplace.utils import cart
-
-from sqlalchemy.exc import DBAPIError
-
-from marketplace.models import (
-    DBSession
-    )
-
 
 class CartViews(object):
     # Add checkout
