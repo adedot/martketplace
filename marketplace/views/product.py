@@ -35,7 +35,6 @@ class ProductViews(object):
                 self.write_picture_to_file(form, product)
 
             form.populate_obj(product)
-            print product.product_picture
             DBSession.add(product)
             return HTTPFound(location=self.request.route_url('home'))
         return {'form':form, 'title':"Add Product",'action':self.request.matchdict.get('action')}

@@ -1,6 +1,15 @@
 __author__ = 'owner'
 
 from marketplace.models import * # To use all the settings in the models package
+from sqlalchemy import (
+    Column,
+    String,
+    Boolean,
+    Date,
+    Integer,
+    Text,
+    )
+
 
 class Category(Base):
 

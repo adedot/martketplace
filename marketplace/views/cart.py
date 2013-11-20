@@ -21,9 +21,8 @@ class CartViews(object):
                 cart.remove_from_cart(request)
             if postdata['submit'] == 'Update':
                 cart.update_cart(request)
-        #    if postdata['submit'] == 'Checkout':
-        #        checkout_url = checkout.get_checkout_url(request)
-        #        return HTTPFound(checkout_url)
+            if postdata['submit'] == 'Checkout':
+                return HTTPFound(location=self.request.route_url('checkout'))
 
 
         cart_subtotal = cart.cart_subtotal(request)

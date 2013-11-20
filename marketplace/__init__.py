@@ -42,8 +42,9 @@ def main(global_config, **settings):
     # Cart Routes
     config.add_route('cart', '/cart')
 
-    # Cart Routes
+    # Checkout Routes
     config.add_route('checkout', '/checkout')
+    config.add_route('checkout_receipt', '/receipt')
 
 
     # Sign authorization - added later

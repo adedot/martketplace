@@ -12,7 +12,10 @@ from pyramid.paster import (
 from ..models import (
     DBSession,
     Base,
+
     )
+from ..models.checkout import Order,OrderItem
+from ..models.users import User
 
 
 def usage(argv):

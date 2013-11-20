@@ -7,7 +7,6 @@ production.ini
 setup.cfg
 setup.py
 marketplace/__init__.py
-marketplace/forms.py
 marketplace/tests.py
 marketplace/utils.py
 marketplace.egg-info/PKG-INFO
@@ -17,11 +16,15 @@ marketplace.egg-info/entry_points.txt
 marketplace.egg-info/not-zip-safe
 marketplace.egg-info/requires.txt
 marketplace.egg-info/top_level.txt
+marketplace/forms/__init__.py
+marketplace/forms/checkout.py
+marketplace/forms/product.py
 marketplace/models/__init__.py
 marketplace/models/cart_item.py
 marketplace/models/category.py
 marketplace/models/checkout.py
 marketplace/models/product.py
+marketplace/models/users.py
 marketplace/scripts/__init__.py
 marketplace/scripts/initializedb.py
 marketplace/static/favicon.ico
@@ -53,6 +56,8 @@ marketplace/templates/registration.mako
 marketplace/templates/search.mako
 marketplace/utils/__init__.py
 marketplace/utils/cart.py
+marketplace/utils/checkout.py
+marketplace/utils/security.py
 marketplace/views/__init__.py
 marketplace/views/cart.py
 marketplace/views/checkout.py

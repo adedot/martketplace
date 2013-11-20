@@ -2,7 +2,22 @@ __author__ = 'owner'
 
 from marketplace.models import * # To use all the settings in the models package
 
-#Add Products
+from sqlalchemy import (
+    Column,
+    String,
+    DECIMAL,
+    Boolean,
+    Date,
+    Integer,
+    Text,
+    )
+
+product_category_table = \
+    Table('product_categories', Base.metadata,
+          Column('product_id', Integer, ForeignKey('product.id')),
+          Column('category_id', Integer, ForeignKey('category.id'))
+    )
+
 
 class Product(Base):
     """ model class containing information about a product; instances of this class are what the user

@@ -28,7 +28,7 @@
 			% if cart_items:
 			<tr>
 				<th class="right" colspan="6">
-					<form method="POST" action=".">
+					<form method="POST" action="${request.route_url('checkout')}">
     					<input type="hidden" name="submit" value="Checkout" />
 
               

@@ -1,7 +1,8 @@
 __author__ = 'owner'
 
 from marketplace.forms import *
-from wtforms import Form, SelectField, TextField, ValidationError
+from wtforms import Form, SelectField, TextField, DateTimeField, ValidationError
+from wtforms.validators import Email
 from marketplace.utils.checkout import *
 
 
@@ -16,7 +17,7 @@ def strip_non_numbers(data):
 
 
 class CheckoutForm(Form):
-    email = TextField("email")
+    email = TextField("email", validators=[Email()])
     phone = TextField("phone")
 
     #Billing Information
@@ -40,8 +41,10 @@ class CheckoutForm(Form):
     # Credit Card Information
     credit_card_type = SelectField("credit_card_type", choices=CARD_TYPES)
     credit_card_number = TextField("credit_card_number")
-    #credit_card_expire_month = SelectField("credit_card_expire_month",choices=cc_expire_months(), coerce=datetime.datetime)
-    #credit_card_expire_year = SelectField("credit_card_expire_year",choices=cc_expire_years(), coerce=datetime.datetime)
+    credit_card_expire_month = DateTimeField("credit_card_expire_month", format="%M")
+    #SelectField("credit_card_expire_month",choices=cc_expire_months(), coerce=datetime.datetime)
+    credit_card_expire_year =  DateTimeField("credit_card_expire_month", format="%Y")
+    #SelectField("credit_card_expire_year",choices=cc_expire_years(), coerce=datetime.datetime)
     credit_card_cvv = TextField("credit_card_cvv")
 
 

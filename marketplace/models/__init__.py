@@ -1,14 +1,6 @@
 __author__ = 'owner'
 
-from sqlalchemy import (
-    Column,
-    String,
-    DECIMAL,
-    Boolean,
-    Date,
-    Integer,
-    Text,
-    )
+
 import sqlalchemy as sa
 from webhelpers.text import urlify #<- will generate slugs
 from webhelpers.paginate import PageURL_WebOb, Page #<- provides pagination
@@ -22,6 +14,7 @@ from sqlalchemy.orm import (
     relationship,
     backref
     )
+
 
 import datetime
 from sqlalchemy.schema import ForeignKey, Table
@@ -46,9 +39,4 @@ After you fix the problem, please restart the Pyramid application to
 try it again.
 """
 
-product_category_table = \
-    Table('product_categories', Base.metadata,
-          Column('product_id', Integer, ForeignKey('product.id')),
-          Column('category_id', Integer, ForeignKey('category.id'))
-    )
 

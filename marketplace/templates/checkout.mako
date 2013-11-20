@@ -42,6 +42,8 @@
 		<table>
 		${form.credit_card_number()}
 		${form.credit_card_type()}
+		${form.credit_card_expire_month()}
+		${form.credit_card_expire_year()}
 		${form.credit_card_cvv()}
 		</table>
 	</fieldset>
