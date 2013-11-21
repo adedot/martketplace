@@ -15,11 +15,6 @@ braintree.Configuration.configure(
     "4023624c52e3f5413490a53884e449e3"
 )
 
-amount = "1000.00"
-credit_card_number = "4111111111111111"
-expiration_month = "05"
-expiration_year = "2012"
-
 
 #result = braintree.Transaction.sale({
 #    "amount": amount,
@@ -120,8 +115,8 @@ def create_order(request, order, transaction_id):
             oi.price = ci.price  # now using @property
             DBSession.add(oi)
 
-        ## all set, clear the cart
-        #cart.empty_cart(request)
+        # all set, clear the cart
+        cart.empty_cart(request)
 
         ## save profile info for future orders
         #if request.user.is_authenticated():
