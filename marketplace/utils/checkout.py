@@ -3,6 +3,7 @@ __author__ = 'owner'
 import braintree
 from marketplace.models.checkout import Order, OrderItem
 from marketplace.utils import cart
+from marketplace.models import DBSession
 
 from datetime import datetime
 
@@ -43,7 +44,7 @@ expiration_year = "2012"
 #        print "  message: " + error.message
 
 
-def process(request):
+def process(request, order):
     """ takes a POST request containing valid order data; pings the payment gateway with the billing
     information and returns a Python dictionary with two entries: 'order_number' and 'message' based on
     the success of the payment processing. An unsuccessful billing will have an order_number of 0 and an error message,
@@ -55,6 +56,7 @@ def process(request):
     DECLINED = '2'
     ERROR = '3'
     HELD_FOR_REVIEW = '4'
+    print "I am processing the request"
 
     postdata = request.POST.copy()
     credit_card_number = postdata.get('credit_card_number', '')
@@ -70,10 +72,10 @@ def process(request):
                             expiration_year=expiration_year)
     })
     if response.is_success:
-        transaction_id = response[6]
-        order = create_order(request, transaction_id)
+        transaction_id = response.transaction.id
+        order = create_order(request, order, transaction_id)
         results = {'order_number': order.id, 'message': u''}
-    if response.transaction:
+    elif response.transaction:
         results = {'order_number': 0, 'message': response.message, 'code': response.transaction.processor_response_code,
                    'text': response.transaction.processor_response_text}
     else:
@@ -81,35 +83,45 @@ def process(request):
     return results
 
 
-def create_order(request, transaction_id):
+def create_order(request, order, transaction_id):
     """ if the POST to the payment gateway successfully billed the customer, create a new order
     containing each CartItem instance, save the order with the transaction ID from the gateway,
     and empty the shopping cart
 
     """
-    order = Order(request.POST)
+
 
     order.transaction_id = transaction_id
-    order.ip_address = request.META.get('REMOTE_ADDR')
+    print transaction_id
+    #order.ip_address = request.META.get('REMOTE_ADDR')
     order.user = None
-    if request.user.is_authenticated():
-        order.user = request.user
+    #if request.user.is_authenticated():
+    #    order.user = request.user
     order.status = Order.SUBMITTED
-    order.save()
 
-    if order.pk:
+    DBSession.add(order)
+
+
+    if order:
         """ if the order save succeeded """
-        cart_items = cart.get_cart_items(request)
+        cart_items = cart.get_cart_items(request).all()
+        print "The items in the cart are: ", cart_items
+
         for ci in cart_items:
             """ create order item for each cart item """
+
+            print "The product is ", ci.product
             oi = OrderItem()
             oi.order = order
             oi.quantity = ci.quantity
-            oi.price = ci.price  # now using @property
             oi.product = ci.product
+            print "The product id is ", ci.product.id
+            oi.product_id = ci.product.id
+            oi.price = ci.price  # now using @property
+            DBSession.add(oi)
 
-        # all set, clear the cart
-        cart.empty_cart(request)
+        ## all set, clear the cart
+        #cart.empty_cart(request)
 
         ## save profile info for future orders
         #if request.user.is_authenticated():

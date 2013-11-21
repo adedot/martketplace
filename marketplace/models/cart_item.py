@@ -29,11 +29,14 @@ class CartItem(Base):
     def name(self):
         return self.product.name
 
+    @property
     def price(self):
         return self.product.price
 
+    @property
     def get_absolute_url(self):
         return self.product.slug
+
 
     def augment_quantity(self, quantity):
         """ called when a POST request comes in for a Product instance already in the shopping cart """

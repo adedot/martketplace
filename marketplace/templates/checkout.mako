@@ -5,7 +5,7 @@
 <div class="span5"> <!--  Content-->
     <div class="input-group">
 
-        <form action="." method="post">
+        <form action="${request.route_url('checkout')}" method="post">
 	        <fieldset class="checkout">
                 <legend>Contact Info</legend>
                 <table>
@@ -13,18 +13,7 @@
                ${form.phone()}
 		</table>
 	</fieldset>
-	<fieldset class="checkout">
-		<legend>Shipping Info</legend>
-		<table>
-		${form.shipping_name()}
-		${form.shipping_address_1()}
-		${form.shipping_address_2()}
-		${form.shipping_city()}
-		${form.shipping_state()}
-		${form.shipping_zip()}
-		${form.shipping_country()}
-		</table>
-	</fieldset>
+
 	<fieldset class="checkout">
 		<legend>Billing Info</legend>
 		<table>
@@ -37,6 +26,19 @@
 		${form.billing_country()}
 		</table>
 	</fieldset>
+		<fieldset class="checkout">
+		<legend>Shipping Info</legend>
+		<table>
+		${form.shipping_name()}
+		${form.shipping_address_1()}
+		${form.shipping_address_2()}
+		${form.shipping_city()}
+		${form.shipping_state()}
+		${form.shipping_zip()}
+		${form.shipping_country()}
+		</table>
+	</fieldset>
+
 	<fieldset class="checkout">
 		<legend>Credit Card Info</legend>
 		<table>

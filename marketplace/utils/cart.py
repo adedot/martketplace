@@ -120,8 +120,8 @@ def is_empty(request):
 
 def empty_cart(request):
     """ empties the shopping cart of the current customer """
-    user_cart = get_cart_items(request)
-    user_cart.delete()
+    DBSession.query(CartItem).filter(CartItem.cart_id ==_cart_id(request)).delete()
+    DBSession.flush()
 
 #def remove_old_cart_items():
 #    """ 1. calculate date of 90 days ago (or session lifespan)

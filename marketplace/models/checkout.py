@@ -57,8 +57,8 @@ class Order(Base):
     status = Column(Integer(default=SUBMITTED))
     ip_address = Column(String(16))
     last_updated = Column(DateTime)
-    user_id = Column(Integer, ForeignKey("user.id"),primary_key=True)
-    user = relationship('User', backref="users")
+    #user_id = Column(Integer, ForeignKey("user.id"),primary_key=True)
+    #user = relationship('User', backref="users")
     transaction_id = Column(String(20), primary_key=True)
 
     @validates('email')
@@ -66,13 +66,14 @@ class Order(Base):
         assert '@' in address
         return address
 
+    @property
     def __unicode__(self):
         return u'Order #' + str(self.id)
 
     @property
     def total(self):
         total = decimal.Decimal('0.00')
-        order_items = OrderItem.objects.filter(order=self)
+        order_items = DBSession.query(OrderItem).filter(OrderItem.order_id==self.id).all()
         for item in order_items:
             total += item.total
         return total
@@ -85,12 +86,13 @@ class OrderItem(Base):
 
     __tablename__ = "order_item"
     """ model class for storing each Product instance purchased in each order """
-    product_id = Column(Integer,  ForeignKey('product.id'),primary_key=True)
+
+    product_id = Column(Integer,  ForeignKey('product.id'), primary_key=True)
     product = relationship('Product', backref="order_items") # Cart can have many products
     quantity = Column(Integer)
     price = Column(DECIMAL(precision=9,scale=2))
-    order_id = Column(Integer,  ForeignKey('order.id'),primary_key=True)
-    order = relationship('Order', backref="orders")
+    order_id = Column(Integer,  ForeignKey('order.id'), primary_key=True)
+    order = relationship('Order', backref="order_items")
 
     @property
     def total(self):
@@ -103,9 +105,9 @@ class OrderItem(Base):
     @property
     def sku(self):
         return self.product.sku
-
+    @property
     def __unicode__(self):
         return self.product.name + ' (' + self.product.sku + ')'
-
+    @property
     def get_absolute_url(self):
         return self.product.get_absolute_url()

@@ -52,6 +52,7 @@ marketplace/templates/layout.mako
 marketplace/templates/login.mako
 marketplace/templates/productaddedit.mako
 marketplace/templates/productview.mako
+marketplace/templates/receipt.mako
 marketplace/templates/registration.mako
 marketplace/templates/search.mako
 marketplace/utils/__init__.py
