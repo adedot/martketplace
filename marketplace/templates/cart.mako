@@ -60,7 +60,6 @@
 					</td>
 					<td>
 						<form method="post" action="${request.route_url('cart')}" class="cart">
-						    <br />
 							<input type="hidden" name="item_id" value="${ item.product.id }" />
 							<input type="submit" name="submit" value="Remove"/>
 						</form>

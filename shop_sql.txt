@@ -1,0 +1,253 @@
+BEGIN;
+CREATE TABLE `shop_product_related_products` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `from_product_id` integer NOT NULL,
+    `to_product_id` integer NOT NULL,
+    UNIQUE (`from_product_id`, `to_product_id`)
+)
+;
+CREATE TABLE `shop_product_upsell_products` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `from_product_id` integer NOT NULL,
+    `to_product_id` integer NOT NULL,
+    UNIQUE (`from_product_id`, `to_product_id`)
+)
+;
+CREATE TABLE `shop_product_categories` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `product_id` integer NOT NULL,
+    `category_id` integer NOT NULL,
+    UNIQUE (`product_id`, `category_id`)
+)
+;
+CREATE TABLE `shop_product` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `keywords_string` varchar(500) NOT NULL,
+    `rating_count` integer NOT NULL,
+    `rating_sum` integer NOT NULL,
+    `rating_average` double precision NOT NULL,
+    `site_id` integer NOT NULL,
+    `title` varchar(500) NOT NULL,
+    `slug` varchar(2000),
+    `_meta_title` varchar(500),
+    `description` longtext NOT NULL,
+    `gen_description` bool NOT NULL,
+    `created` datetime,
+    `updated` datetime,
+    `status` integer NOT NULL,
+    `publish_date` datetime,
+    `expiry_date` datetime,
+    `short_url` varchar(200),
+    `in_sitemap` bool NOT NULL,
+    `content` longtext NOT NULL,
+    `unit_price` numeric(10, 2),
+    `sale_id` integer,
+    `sale_price` numeric(10, 2),
+    `sale_from` datetime,
+    `sale_to` datetime,
+    `sku` varchar(20) UNIQUE,
+    `num_in_stock` integer,
+    `available` bool NOT NULL,
+    `image` varchar(100),
+    `date_added` datetime
+)
+;
+ALTER TABLE `shop_product` ADD CONSTRAINT `site_id_refs_id_f9828cc8` FOREIGN KEY (`site_id`) REFERENCES `django_site` (`id`);
+ALTER TABLE `shop_product_related_products` ADD CONSTRAINT `from_product_id_refs_id_79a65913` FOREIGN KEY (`from_product_id`) REFERENCES `shop_product` (`id`);
+ALTER TABLE `shop_product_related_products` ADD CONSTRAINT `to_product_id_refs_id_79a65913` FOREIGN KEY (`to_product_id`) REFERENCES `shop_product` (`id`);
+ALTER TABLE `shop_product_upsell_products` ADD CONSTRAINT `from_product_id_refs_id_a83012f5` FOREIGN KEY (`from_product_id`) REFERENCES `shop_product` (`id`);
+ALTER TABLE `shop_product_upsell_products` ADD CONSTRAINT `to_product_id_refs_id_a83012f5` FOREIGN KEY (`to_product_id`) REFERENCES `shop_product` (`id`);
+ALTER TABLE `shop_product_categories` ADD CONSTRAINT `product_id_refs_id_e629ab17` FOREIGN KEY (`product_id`) REFERENCES `shop_product` (`id`);
+CREATE TABLE `shop_productimage` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `_order` integer,
+    `file` varchar(100) NOT NULL,
+    `description` varchar(100) NOT NULL,
+    `product_id` integer NOT NULL
+)
+;
+ALTER TABLE `shop_productimage` ADD CONSTRAINT `product_id_refs_id_cbd1a7a7` FOREIGN KEY (`product_id`) REFERENCES `shop_product` (`id`);
+CREATE TABLE `shop_productoption` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `type` integer NOT NULL,
+    `name` varchar(50)
+)
+;
+CREATE TABLE `shop_productvariation` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `unit_price` numeric(10, 2),
+    `sale_id` integer,
+    `sale_price` numeric(10, 2),
+    `sale_from` datetime,
+    `sale_to` datetime,
+    `sku` varchar(20) UNIQUE,
+    `num_in_stock` integer,
+    `product_id` integer NOT NULL,
+    `default` bool NOT NULL,
+    `image_id` integer,
+    `option1` varchar(50),
+    `option2` varchar(50)
+)
+;
+ALTER TABLE `shop_productvariation` ADD CONSTRAINT `product_id_refs_id_b4c20a7f` FOREIGN KEY (`product_id`) REFERENCES `shop_product` (`id`);
+ALTER TABLE `shop_productvariation` ADD CONSTRAINT `image_id_refs_id_fa98dcfb` FOREIGN KEY (`image_id`) REFERENCES `shop_productimage` (`id`);
+CREATE TABLE `shop_category_options` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `category_id` integer NOT NULL,
+    `productoption_id` integer NOT NULL,
+    UNIQUE (`category_id`, `productoption_id`)
+)
+;
+ALTER TABLE `shop_category_options` ADD CONSTRAINT `productoption_id_refs_id_34b5eb69` FOREIGN KEY (`productoption_id`) REFERENCES `shop_productoption` (`id`);
+CREATE TABLE `shop_category` (
+    `page_ptr_id` integer NOT NULL PRIMARY KEY,
+    `content` longtext NOT NULL,
+    `featured_image` varchar(255),
+    `sale_id` integer,
+    `price_min` numeric(10, 2),
+    `price_max` numeric(10, 2),
+    `combined` bool NOT NULL
+)
+;
+ALTER TABLE `shop_category` ADD CONSTRAINT `page_ptr_id_refs_id_0beb7432` FOREIGN KEY (`page_ptr_id`) REFERENCES `pages_page` (`id`);
+ALTER TABLE `shop_product_categories` ADD CONSTRAINT `category_id_refs_page_ptr_id_b08729ce` FOREIGN KEY (`category_id`) REFERENCES `shop_category` (`page_ptr_id`);
+ALTER TABLE `shop_category_options` ADD CONSTRAINT `category_id_refs_page_ptr_id_87339c75` FOREIGN KEY (`category_id`) REFERENCES `shop_category` (`page_ptr_id`);
+CREATE TABLE `shop_order` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `billing_detail_first_name` varchar(100) NOT NULL,
+    `billing_detail_last_name` varchar(100) NOT NULL,
+    `billing_detail_street` varchar(100) NOT NULL,
+    `billing_detail_city` varchar(100) NOT NULL,
+    `billing_detail_state` varchar(100) NOT NULL,
+    `billing_detail_postcode` varchar(10) NOT NULL,
+    `billing_detail_country` varchar(100) NOT NULL,
+    `billing_detail_phone` varchar(20) NOT NULL,
+    `billing_detail_email` varchar(75) NOT NULL,
+    `shipping_detail_first_name` varchar(100) NOT NULL,
+    `shipping_detail_last_name` varchar(100) NOT NULL,
+    `shipping_detail_street` varchar(100) NOT NULL,
+    `shipping_detail_city` varchar(100) NOT NULL,
+    `shipping_detail_state` varchar(100) NOT NULL,
+    `shipping_detail_postcode` varchar(10) NOT NULL,
+    `shipping_detail_country` varchar(100) NOT NULL,
+    `shipping_detail_phone` varchar(20) NOT NULL,
+    `additional_instructions` longtext NOT NULL,
+    `time` datetime,
+    `key` varchar(40) NOT NULL,
+    `user_id` integer,
+    `shipping_type` varchar(50) NOT NULL,
+    `shipping_total` numeric(10, 2),
+    `tax_type` varchar(50) NOT NULL,
+    `tax_total` numeric(10, 2),
+    `item_total` numeric(10, 2),
+    `discount_code` varchar(20) NOT NULL,
+    `discount_total` numeric(10, 2),
+    `total` numeric(10, 2),
+    `transaction_id` varchar(255),
+    `status` integer NOT NULL
+)
+;
+CREATE TABLE `shop_cart` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `last_updated` datetime
+)
+;
+CREATE TABLE `shop_cartitem` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `sku` varchar(20) NOT NULL,
+    `description` varchar(2000) NOT NULL,
+    `quantity` integer NOT NULL,
+    `unit_price` numeric(10, 2),
+    `total_price` numeric(10, 2),
+    `cart_id` integer NOT NULL,
+    `url` varchar(2000) NOT NULL,
+    `image` varchar(200)
+)
+;
+ALTER TABLE `shop_cartitem` ADD CONSTRAINT `cart_id_refs_id_2335207e` FOREIGN KEY (`cart_id`) REFERENCES `shop_cart` (`id`);
+CREATE TABLE `shop_orderitem` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `sku` varchar(20) NOT NULL,
+    `description` varchar(2000) NOT NULL,
+    `quantity` integer NOT NULL,
+    `unit_price` numeric(10, 2),
+    `total_price` numeric(10, 2),
+    `order_id` integer NOT NULL
+)
+;
+ALTER TABLE `shop_orderitem` ADD CONSTRAINT `order_id_refs_id_53b51ae1` FOREIGN KEY (`order_id`) REFERENCES `shop_order` (`id`);
+CREATE TABLE `shop_productaction` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `product_id` integer NOT NULL,
+    `timestamp` integer NOT NULL,
+    `total_cart` integer NOT NULL,
+    `total_purchase` integer NOT NULL,
+    UNIQUE (`product_id`, `timestamp`)
+)
+;
+ALTER TABLE `shop_productaction` ADD CONSTRAINT `product_id_refs_id_1390b12c` FOREIGN KEY (`product_id`) REFERENCES `shop_product` (`id`);
+CREATE TABLE `shop_sale_products` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `sale_id` integer NOT NULL,
+    `product_id` integer NOT NULL,
+    UNIQUE (`sale_id`, `product_id`)
+)
+;
+ALTER TABLE `shop_sale_products` ADD CONSTRAINT `product_id_refs_id_a8533437` FOREIGN KEY (`product_id`) REFERENCES `shop_product` (`id`);
+CREATE TABLE `shop_sale_categories` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `sale_id` integer NOT NULL,
+    `category_id` integer NOT NULL,
+    UNIQUE (`sale_id`, `category_id`)
+)
+;
+ALTER TABLE `shop_sale_categories` ADD CONSTRAINT `category_id_refs_page_ptr_id_05d56e42` FOREIGN KEY (`category_id`) REFERENCES `shop_category` (`page_ptr_id`);
+CREATE TABLE `shop_sale` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `title` varchar(100) NOT NULL,
+    `active` bool NOT NULL,
+    `discount_deduct` numeric(10, 2),
+    `discount_percent` numeric(5, 2),
+    `discount_exact` numeric(10, 2),
+    `valid_from` datetime,
+    `valid_to` datetime
+)
+;
+ALTER TABLE `shop_category` ADD CONSTRAINT `sale_id_refs_id_ddbf472a` FOREIGN KEY (`sale_id`) REFERENCES `shop_sale` (`id`);
+ALTER TABLE `shop_sale_products` ADD CONSTRAINT `sale_id_refs_id_624a5c7e` FOREIGN KEY (`sale_id`) REFERENCES `shop_sale` (`id`);
+ALTER TABLE `shop_sale_categories` ADD CONSTRAINT `sale_id_refs_id_d3bde74c` FOREIGN KEY (`sale_id`) REFERENCES `shop_sale` (`id`);
+CREATE TABLE `shop_discountcode_products` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `discountcode_id` integer NOT NULL,
+    `product_id` integer NOT NULL,
+    UNIQUE (`discountcode_id`, `product_id`)
+)
+;
+ALTER TABLE `shop_discountcode_products` ADD CONSTRAINT `product_id_refs_id_c82e568c` FOREIGN KEY (`product_id`) REFERENCES `shop_product` (`id`);
+CREATE TABLE `shop_discountcode_categories` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `discountcode_id` integer NOT NULL,
+    `category_id` integer NOT NULL,
+    UNIQUE (`discountcode_id`, `category_id`)
+)
+;
+ALTER TABLE `shop_discountcode_categories` ADD CONSTRAINT `category_id_refs_page_ptr_id_80ec826c` FOREIGN KEY (`category_id`) REFERENCES `shop_category` (`page_ptr_id`);
+CREATE TABLE `shop_discountcode` (
+    `id` integer AUTO_INCREMENT NOT NULL PRIMARY KEY,
+    `title` varchar(100) NOT NULL,
+    `active` bool NOT NULL,
+    `discount_deduct` numeric(10, 2),
+    `discount_percent` numeric(5, 2),
+    `discount_exact` numeric(10, 2),
+    `valid_from` datetime,
+    `valid_to` datetime,
+    `code` varchar(20) NOT NULL UNIQUE,
+    `min_purchase` numeric(10, 2),
+    `free_shipping` bool NOT NULL,
+    `uses_remaining` integer
+)
+;
+ALTER TABLE `shop_discountcode_products` ADD CONSTRAINT `discountcode_id_refs_id_620c5ab7` FOREIGN KEY (`discountcode_id`) REFERENCES `shop_discountcode` (`id`);
+ALTER TABLE `shop_discountcode_categories` ADD CONSTRAINT `discountcode_id_refs_id_b2395a04` FOREIGN KEY (`discountcode_id`) REFERENCES `shop_discountcode` (`id`);
+
+COMMIT;

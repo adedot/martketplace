@@ -12,23 +12,11 @@ from marketplace.models import * # To use all the settings in the models package
 from marketplace.models.product import Product
 from marketplace.models.category import Category
 
-class Order(Base):
-    """ model class for storing a customer order instance """
-    # each individual status
-    __tablename__ = "order"
 
-    SUBMITTED = 1
-    PROCESSED = 2
-    SHIPPED = 3
-    CANCELLED = 4
-    # set of possible order statuses
-    ORDER_STATUSES = ((SUBMITTED,'Submitted'),
-                      (PROCESSED,'Processed'),
-                      (SHIPPED,'Shipped'),
-                      (CANCELLED,'Cancelled'),)
+class BaseOrderInfo(Base):
+    __abstract__=  True
 
-    #contact info
-    id = Column(Integer, primary_key=True)
+    # contact info
     email = Column(String(50))
     phone = Column(String(20))
 
@@ -50,7 +38,22 @@ class Order(Base):
     billing_country = Column(String(50))
     billing_zip = Column(String(10))
 
+class Order(Base):
+    """ model class for storing a customer order instance """
+    # each individual status
+    __tablename__ = "order"
 
+    SUBMITTED = 1
+    PROCESSED = 2
+    SHIPPED = 3
+    CANCELLED = 4
+    # set of possible order statuses
+    ORDER_STATUSES = ((SUBMITTED,'Submitted'),
+                      (PROCESSED,'Processed'),
+                      (SHIPPED,'Shipped'),
+                      (CANCELLED,'Cancelled'),)
+
+    id = Column(Integer, primary_key=True)
 
     #order info
     date = Column(DateTime)
@@ -58,7 +61,7 @@ class Order(Base):
     ip_address = Column(String(16))
     last_updated = Column(DateTime)
     #user_id = Column(Integer, ForeignKey("user.id"),primary_key=True)
-    #user = relationship('User', backref="users")
+    #user = relationship('User', backref="orders")
     transaction_id = Column(String(20), primary_key=True)
 
     @validates('email')

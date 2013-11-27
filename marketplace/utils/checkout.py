@@ -16,29 +16,6 @@ braintree.Configuration.configure(
 )
 
 
-#result = braintree.Transaction.sale({
-#    "amount": amount,
-#    "credit_card": dict(number=credit_card_number, expiration_month=expiration_month, expiration_year=expiration_year)
-#})
-#
-#
-#
-#
-#if result.is_success:
-#    print "success!: " + result.transaction.id
-#elif result.transaction:
-#    print "Error processing transaction:"
-#    print "  message: " + result.message
-#    print "  code:    " + result.transaction.processor_response_code
-#    print "  text:    " + result.transaction.processor_response_text
-#else:
-#    print "message: " + result.message
-#    for error in result.errors.deep_errors:
-#        print "attribute: " + error.attribute
-#        print "  code: " + error.code
-#        print "  message: " + error.message
-
-
 def process(request, order):
     """ takes a POST request containing valid order data; pings the payment gateway with the billing
     information and returns a Python dictionary with two entries: 'order_number' and 'message' based on

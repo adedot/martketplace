@@ -9,44 +9,43 @@
 	        <fieldset class="checkout">
                 <legend>Contact Info</legend>
                 <table>
-                ${form.email()}
-               ${form.phone()}
+              <p> Email:  ${form.email()} </p> </p>
+               <p> :${form.phone()} </p>
 		</table>
 	</fieldset>
 
 	<fieldset class="checkout">
 		<legend>Billing Info</legend>
 		<table>
-		${form.billing_name()}
-		${form.billing_address_1()}
-		${form.billing_address_2()}
-		${form.billing_city()}
-		${form.billing_state()}
-		${form.billing_zip()}
-		${form.billing_country()}
+		<p> :${form.billing_name()} </p>
+		<p> :${form.billing_address_1()} </p>
+		<p> :${form.billing_address_2()} </p>
+		<p> :${form.billing_city()} </p>
+		<p> :${form.billing_state()} </p>
+		<p> :${form.billing_zip()} </p>
+		<p> :${form.billing_country()} </p>
 		</table>
 	</fieldset>
 		<fieldset class="checkout">
 		<legend>Shipping Info</legend>
 		<table>
-		${form.shipping_name()}
-		${form.shipping_address_1()}
-		${form.shipping_address_2()}
-		${form.shipping_city()}
-		${form.shipping_state()}
-		${form.shipping_zip()}
-		${form.shipping_country()}
+		<p> :${form.shipping_name()} </p>
+		<p> :${form.shipping_address_1()} </p>
+		<p> :${form.shipping_address_2()} </p>
+		<p> :${form.shipping_city()} </p>
+		<p> :${form.shipping_state()} </p>
+		<p> :${form.shipping_zip()} </p>
+		<p> :${form.shipping_country()} </p>
 		</table>
 	</fieldset>
 
 	<fieldset class="checkout">
 		<legend>Credit Card Info</legend>
 		<table>
-		${form.credit_card_number()}
-		${form.credit_card_type()}
-		${form.credit_card_expire_month()}
-		${form.credit_card_expire_year()}
-		${form.credit_card_cvv()}
+		<p> Credit Card Number: ${form.credit_card_number()} </p>
+		<p> Credit Card Type ${form.credit_card_type()} </p>
+		<p> Credit Card Expiration Month :${form.credit_card_expire_month()} Year :${form.credit_card_expire_year()} </p>
+		<p> CCV: ${form.credit_card_cvv()} </p>
 		</table>
 	</fieldset>
 	<table>

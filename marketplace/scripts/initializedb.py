@@ -16,6 +16,7 @@ from ..models import (
     )
 from ..models.checkout import Order,OrderItem
 from ..models.users import User
+from ..models.billing import Card
 
 
 def usage(argv):
