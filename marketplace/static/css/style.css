@@ -414,7 +414,7 @@ header form input, header form button{
 
 .navbar .nav > li > a{
    padding:14px 15px 14px;
-   color:#fff !important;
+   color:#5eb2d9 !important;
    text-shadow:none !important;
    -webkit-transition:background 1s ease;
    -moz-transition:background 1s ease;
@@ -1376,6 +1376,7 @@ footer .payment-icons img{
 	header .logo{
 		text-align: center;
 		margin-bottom:10px;
+
 	}
 	
 	header form{

@@ -9,21 +9,21 @@
 	        <fieldset class="checkout">
                 <legend>Contact Info</legend>
                 <table>
-              <p> Email:  ${form.email()} </p> </p>
-               <p> :${form.phone()} </p>
+              <p> Email:        ${form.email()} </p>
+               <p>Phone:        ${form.phone()} </p>
 		</table>
 	</fieldset>
 
 	<fieldset class="checkout">
 		<legend>Billing Info</legend>
 		<table>
-		<p> :${form.billing_name()} </p>
-		<p> :${form.billing_address_1()} </p>
-		<p> :${form.billing_address_2()} </p>
-		<p> :${form.billing_city()} </p>
-		<p> :${form.billing_state()} </p>
-		<p> :${form.billing_zip()} </p>
-		<p> :${form.billing_country()} </p>
+		<p> Name:               ${form.billing_name()} </p>
+		<p> Address Line #1:    ${form.billing_address_1()} </p>
+		<p> Address Line #2 :   ${form.billing_address_2()} </p>
+		<p> City:               ${form.billing_city()} </p>
+		<p> State:              ${form.billing_state()} </p>
+		<p> Zipcode:            ${form.billing_zip()} </p>
+		<p> Country:           ${form.billing_country()} </p>
 		</table>
 	</fieldset>
 		<fieldset class="checkout">

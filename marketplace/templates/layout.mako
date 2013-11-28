@@ -19,7 +19,7 @@
     
     <link rel="stylesheet" href="${request.static_url('marketplace:static/css/sidebar-nav.css')}">
     <link rel="stylesheet" href="${request.static_url('marketplace:static/css/style.css')}">
-    <link rel="stylesheet" href="${request.static_url('marketplace:static/css/black.css')}">
+    <link rel="stylesheet" href="${request.static_url('marketplace:static/css/red-blue.css')}">
       <!-- JS -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <!-- Bootstrap 3 -->
@@ -52,23 +52,25 @@
       <div class="row">
 
         <div class="col-md-4">
-          <!-- Logo. Use class "color" to add color to the text. -->
-          <div class="logo">
-            <h1><a href="${request.route_url('home')}">Okada<span class="color bold">Market Place</span></a></h1>
-            <p class="meta">online shopping is fun!!!</p>
-          </div>
+        <div class="social">
+          <a href="#"><i class="icon-facebook facebook"></i></a>
+          <a href="#"><i class="icon-twitter twitter"></i></a>
+          <a href="#"><i class="icon-linkedin linkedin"></i></a>
+          <a href="#"><i class="icon-google-plus google-plus"></i></a>
+        </div>
+
         </div>
 
         <div class="col-md-5 col-md-offset-3 pull-right">
 
           <!-- Search form -->
-            <form class="form-inline" role="form" action="${request.route_url('product_action',action='search')}" method="post" name="search">
+            <form class="form-inline" role="form" action="#" method="post" name="email">
 			  <div class="form-group">
-				<input type="query" class="form-control" id="search" placeholder="Search">
+				<input type="email" class="form-control" id="email" placeholder="Email Address">
 			  </div>
 
 
-			  <button type="submit" class="btn btn-default">Search</button>
+			  <button type="submit" class="btn btn-default">Subscribe</button>
 			</form>
 
           <div class="hlinks">
@@ -112,52 +114,18 @@
 				  </button>
 
 				</div>
+				          <!-- Logo. Use class "color" to add color to the text. -->
+                  <div class="logo">
+                    <h1><a href="${request.route_url('home')}">Okada <span class="color bold">Market Place</span></a></h1>
+
+                  </div>
+
                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                  <ul class="nav navbar-nav">
                    <li><a href="${request.route_url('home')}"><i class="icon-home"></i></a></li>
-                   <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Account <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="myaccount.html">My Account</a></li>
-                        <li><a href="view-cart.html">View Cart</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="wish-list.html">Wish List</a></li>
-                        <li><a href="order-history.html">Order History</a></li>
-                        <li><a href="edit-profile.html">Edit Profile</a></li>
-                        <li><a href="confirmation.html">Confirmation</a></li>
-                      </ul>
-                   </li>
-                   <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="general.html">General</a></li>
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="register.html">Register</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Blog Single</a></li>
-                        <li><a href="404.html">404</a></li>
-                      </ul>
-                   </li>
-                   <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ladies <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="items.html">Bags</a></li>
-                        <li><a href="items.html">Shoes</a></li>
-                        <li><a href="items.html">Handbags</a></li>
-                        <li><a href="items.html">Accessories</a></li>
-                        <li><a href="items.html">Cosmetics</a></li>
-                      </ul>
-                   </li>
-                   <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Confectionaries <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="items.html">Cakes</a></li>
-                        <li><a href="items.html">Vitamins</a></li>
-                        <li><a href="items.html">Drugs</a></li>
-                      </ul>
-                   </li>
-                   <li><a href="support.html">Support</a></li>
-                   <li><a href="contact.html">Contact</a></li>
+                   <li><a href="support.html">Food</a></li>
+                   <li><a href="contact.html">Pharmacy</a></li>
+                   <li><a href="#">Vitamins</a></li>
                  </ul>
                </nav>
               </div>
@@ -185,12 +153,7 @@
                 <div class="widget">
                   <h5>Contact</h5>
                   <hr />
-                    <div class="social">
-                      <a href="#"><i class="icon-facebook facebook"></i></a>
-                      <a href="#"><i class="icon-twitter twitter"></i></a>
-                      <a href="#"><i class="icon-linkedin linkedin"></i></a>
-                      <a href="#"><i class="icon-google-plus google-plus"></i></a>
-                    </div>
+
                   <hr />
                   <i class="icon-home"></i> &nbsp; 123, Some Area. Los Angeles, CA, 54321.
                   <hr />
@@ -222,16 +185,6 @@
                   <hr />
                   <div class="two-col">
                     <div class="col-left">
-                      <ul>
-                        <li><a href="#">Condimentum</a></li>
-                        <li><a href="#">Etiam at</a></li>
-                        <li><a href="#">Fusce vel</a></li>
-                        <li><a href="#">Vivamus</a></li>
-                        <li><a href="#">Pellentesque</a></li>
-                        <li><a href="#">Vivamus</a></li>
-                      </ul>
-                    </div>
-                    <div class="col-right">
                       <ul>
                         <li><a href="#">Condimentum</a></li>
                         <li><a href="#">Etiam at</a></li>
