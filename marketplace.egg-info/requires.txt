@@ -1,3 +1,6 @@
+PyMySQL
+alembic
+braintree
 pyramid
 SQLAlchemy
 transaction

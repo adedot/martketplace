@@ -37,6 +37,7 @@ marketplace/static/footerbg.png
 marketplace/static/headerbg.png
 marketplace/static/ie6.css
 marketplace/static/transparent.gif
+marketplace/static/css/black-white.css
 marketplace/static/css/black.css
 marketplace/static/css/blue.css
 marketplace/static/css/bootstrap.css
@@ -46,6 +47,7 @@ marketplace/static/css/font-awesome.css
 marketplace/static/css/green.css
 marketplace/static/css/orange.css
 marketplace/static/css/prettyPhoto.css
+marketplace/static/css/red-blue.css
 marketplace/static/css/red.css
 marketplace/static/css/sidebar-nav.css
 marketplace/static/css/style.css

@@ -1,10 +1,25 @@
 __author__ = 'owner'
-from wtforms import Form, TextField, DecimalField, FileField, IntegerField, BooleanField, HiddenField
+from wtforms import Form, TextField, DecimalField, FileField, IntegerField, BooleanField, HiddenField,SelectMultipleField
 from marketplace.forms import *
+from marketplace.models.category import Category
 
 # used to remove all the whitespace from
 # the beginning and end of our input
 strip_filter = lambda x: x.strip() if x else None
+
+categories = Category.all()
+
+# Creates list of values based on first value of category results tuple
+categories = [value for (value, ) in categories]
+
+category_tuple = () #Used for select list of categories
+
+# Add tuple to a tuple of tuples
+for name in categories:
+    category_choice = (name, name)
+    category_tuple = category_tuple + (category_choice,)
+
+
 
 class SearchForm(Form):
 	query = TextField('query', [Required()])
@@ -27,7 +42,9 @@ class ProductAddForm(Form):
                          filters=[strip_filter])
     meta_description =  TextField('meta_description',
                          filters=[strip_filter])
-    product_picture = FileField(u'Profile Picture')
+    image = FileField(u'product_image')
+
+    categories = SelectMultipleField("categories", choices=category_tuple)
 
     def validate_image(form, field):
         if field.data:

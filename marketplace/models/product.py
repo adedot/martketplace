@@ -27,7 +27,7 @@ class Product(Base):
     __tablename__ = "product"
     id = Column(Integer, primary_key=True)
     name = Column(String(255), unique=True)
-    slug = Column('slug', String(255), unique=True) # Unique value for product page URL, created automatically from name.
+    slug = Column('slug', String(255)) # Unique value for product page URL, created automatically from name.
     brand = Column(String(50))
     sku = Column(String(50))
     price = Column(DECIMAL(precision=9,scale=2))
@@ -37,12 +37,36 @@ class Product(Base):
     is_featured = Column(Boolean,default=False)
     quantity = Column(Integer)
     description = Column(Text)
-    meta_keywords = Column(String(255), unique=True) # Comma-delimited set of SEO keywords for keywords meta tag')
-    meta_description = Column(String(255), unique=True) # Content for description meta tag
+    meta_keywords = Column(String(255)) # Comma-delimited set of SEO keywords for keywords meta tag')
+    meta_description = Column(String(255)) # Content for description meta tag
     created_at = Column(Date,default=datetime.datetime.utcnow)
     updated_at = Column(Date, default=datetime.datetime.utcnow)
-    product_picture = Column(String(255))
+    image = Column(String(255))
     categories = relationship('Category', secondary=product_category_table, backref='products')
+
+    def __init__(self, name, brand="", sku="", price=0.0, old_price=0.0, is_active =True, is_bestseller =True ,
+                 is_featured=None, quantity = None, description = None, meta_keywords =None, meta_description = None,
+                 created_at = datetime.datetime.now(), updated_at = datetime.datetime.now(), image = None,
+                 categories=[]):
+        self.name = name
+        self.brand = brand
+        self.sku = sku
+        self.price = price
+        self.old_price = old_price
+        self.is_active = is_active
+        self.is_bestseller = is_bestseller
+        self.is_featured = is_featured
+        self.quantity = quantity
+        self.description = description
+        self.meta_keywords = meta_keywords
+        self.meta_description = meta_description
+        self.created_at = created_at
+        self.updated_at = updated_at
+        self.image = image
+        self.categories = categories
+
+
+
 
     @classmethod
     def all(cls):

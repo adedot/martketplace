@@ -19,7 +19,8 @@
             <p>Description: ${form.description()} </p>
             <p>Key Words: ${form.meta_keywords()} </p>
             <p>Meta Description: ${form.meta_description()} </p>
-            <p>Product Picture: ${form.product_picture()} </p>
+            <p>Product Picture: ${form.image()} </p>
+            <p> Categories: ${form.categories()} </p>
             <span class="input-group-btn">
                 <p><input class="btn btn-default" type="submit" value="Save Product" /></p>
             </span>

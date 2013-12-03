@@ -113,7 +113,10 @@ def cart_subtotal(request):
 
 # returns the total number of items in the user's cart
 def cart_distinct_item_count(request):
+    # check for items
+    # if there are items, return the number
     return get_cart_items(request).count()
+    # else return 0
 
 def is_empty(request):
     return cart_distinct_item_count(request) == 0

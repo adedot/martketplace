@@ -19,10 +19,23 @@ class Category(Base):
     slug = Column('slug', String(255), unique=True) # Unique value for product page URL, created automatically from name.
     is_active = Column(Boolean,default=True)
     description = Column(Text)
-    meta_keywords = Column(String(255), unique=True) # Comma-delimited set of SEO keywords for keywords meta tag')
-    meta_description = Column(String(255), unique=True) # Content for description meta tag
+    meta_keywords = Column(String(255)) # Comma-delimited set of SEO keywords for keywords meta tag')
+    meta_description = Column(String(255)) # Content for description meta tag
     created_at = Column(Date,default=datetime.datetime.utcnow)
     updated_at = Column(Date, default=datetime.datetime.utcnow)
+
+    def __init__(self, name, is_active, description, meta_keywords, meta_description):
+        self.name = name
+        self.is_active = is_active
+        self.description = description
+        self.meta_keywords = meta_keywords
+        self.meta_description = meta_description
+
+    @classmethod
+    def all(cls):
+        return DBSession.query(Category.name).distinct()
+
+
 
     @property
     def slug(self):

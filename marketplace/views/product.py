@@ -31,7 +31,7 @@ class ProductViews(object):
         form = ProductAddForm(self.request.POST)
         if self.request.method =="POST" and form.validate():
 
-            if form.product_picture.data:
+            if form.image.data:
                 self.write_picture_to_file(form, product)
 
             form.populate_obj(product)
@@ -65,14 +65,14 @@ class ProductViews(object):
         # Create new image file
         settings = self.request.registry.settings
         picture_directory = str(settings['picture_directory']).strip("\"")
-        image_file = os.path.join(picture_directory, form.product_picture.data.filename)
+        image_file = os.path.join(picture_directory, form.image.data.filename)
         # write image data to image file
         destination = open(image_file, 'wb+')
-        for line in form.product_picture.data.file:
+        for line in form.image.data.file:
             destination.write(line)
         destination.close()
-        form.product_picture.data = image_file
-        product.product_picture = form.product_picture.data
+        form.image.data = image_file
+        product.image = form.image.data
 
     @view_config(route_name='product_action', match_param='action=edit', renderer='marketplace:templates/productaddedit.mako')
     def product_edit(self):
@@ -85,7 +85,7 @@ class ProductViews(object):
 
         if self.request.method == 'POST' and form.validate():
 
-            if form.product_picture.data.filename:
+            if form.image.data.filename:
 
                 self.write_picture_to_file(form, product)
 
