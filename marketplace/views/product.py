@@ -10,6 +10,7 @@ from marketplace.models import (
     )
 
 from marketplace.models.product import Product
+from marketplace.models.category import Category
 
 class ProductViews(object):
     def __init__(self, request):
@@ -34,7 +35,14 @@ class ProductViews(object):
             if form.image.data:
                 self.write_picture_to_file(form, product)
 
+            if form.categories.data:
+
+                categories = DBSession.query(Category).filter(Category.name.in_(form.categories.data)).all()
+                product.categories = categories
+                form.categories.data = categories
+
             form.populate_obj(product)
+            print product.categories
             DBSession.add(product)
             return HTTPFound(location=self.request.route_url('home'))
         return {'form':form, 'title':"Add Product",'action':self.request.matchdict.get('action')}
@@ -65,33 +73,63 @@ class ProductViews(object):
         # Create new image file
         settings = self.request.registry.settings
         picture_directory = str(settings['picture_directory']).strip("\"")
+
         image_file = os.path.join(picture_directory, form.image.data.filename)
+
+        print"Writing to file: ", image_file
         # write image data to image file
         destination = open(image_file, 'wb+')
         for line in form.image.data.file:
             destination.write(line)
         destination.close()
-        form.image.data = image_file
+        form.image.data = form.image.data
         product.image = form.image.data
+        print "The file name is ", form.image.data
+
+        #product.image = form.image.data
 
     @view_config(route_name='product_action', match_param='action=edit', renderer='marketplace:templates/productaddedit.mako')
     def product_edit(self):
         id = int(self.request.params.get('id', -1))
         product = Product.by_id(id)
+        print product.categories
+
 
         if not product:
             return HTTPNotFound()
+
+        category_list = []
+
+        for category in product.categories:
+            category_list.append(category.name)
+
         form = ProductUpdateForm(self.request.POST, product)
+        form.categories.data = category_list
 
         if self.request.method == 'POST' and form.validate():
 
-            if form.image.data.filename:
+            print "\n\nImage data is: ", form.image.data
 
+            if form.image.data:
                 self.write_picture_to_file(form, product)
 
+            if form.categories.data:
+                print form.categories.data
+                categories = DBSession.query(Category).filter(Category.name.in_(form.categories.data)).all()
+                #print "New Categories are: ", categories.names()
+                for category in categories:
+                    print category.name
+                product.categories = categories
+                form.categories.data = product.categories
+
+            print "Printing the form data", form
             form.populate_obj(product)
+
             return HTTPFound(location=self.request.route_url('product', id=product.id,
                                                         slug=product.slug))
+        else:
+            #flash(form.errors)
+            print form.errors
         return {'form':form, 'title':"Edit Product", 'action':self.request.matchdict.get('action')}
 
     @view_config(route_name='product_action', match_param='action=search', renderer='marketplace:templates/search.mako')

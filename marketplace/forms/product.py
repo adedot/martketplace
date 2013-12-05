@@ -7,7 +7,7 @@ from marketplace.models.category import Category
 # the beginning and end of our input
 strip_filter = lambda x: x.strip() if x else None
 
-categories = Category.all()
+categories = Category.names()
 
 # Creates list of values based on first value of category results tuple
 categories = [value for (value, ) in categories]
@@ -42,7 +42,7 @@ class ProductAddForm(Form):
                          filters=[strip_filter])
     meta_description =  TextField('meta_description',
                          filters=[strip_filter])
-    image = FileField(u'product_image')
+    image = FileField('image')
 
     categories = SelectMultipleField("categories", choices=category_tuple)
 

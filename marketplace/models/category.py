@@ -30,12 +30,13 @@ class Category(Base):
         self.description = description
         self.meta_keywords = meta_keywords
         self.meta_description = meta_description
+    #def __init__(self, category):
+
+
 
     @classmethod
-    def all(cls):
+    def names(cls):
         return DBSession.query(Category.name).distinct()
-
-
 
     @property
     def slug(self):

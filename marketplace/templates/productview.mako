@@ -19,6 +19,14 @@
         <p> <b>Product Description:</b> </p>
         <p> ${product.description}</b></p>
 
+        %if product.categories:
+        <p> <b> Categories </b></p>
+        % for category in product.categories:
+             <b> ${category.name} </b>
+        % endfor
+        % endif
+
+        </p>
          <span class="input-group-btn">
                 <p><input class="btn btn-default" type="submit" value="Add to Cart" /></p>
             </span>

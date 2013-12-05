@@ -42,7 +42,9 @@ class Product(Base):
     created_at = Column(Date,default=datetime.datetime.utcnow)
     updated_at = Column(Date, default=datetime.datetime.utcnow)
     image = Column(String(255))
-    categories = relationship('Category', secondary=product_category_table, backref='products')
+    categories = relationship('Category', secondary=product_category_table, cascade="all", lazy='dynamic', backref='products')
+
+
 
     def __init__(self, name, brand="", sku="", price=0.0, old_price=0.0, is_active =True, is_bestseller =True ,
                  is_featured=None, quantity = None, description = None, meta_keywords =None, meta_description = None,
@@ -64,8 +66,6 @@ class Product(Base):
         self.updated_at = updated_at
         self.image = image
         self.categories = categories
-
-
 
 
     @classmethod

@@ -132,6 +132,7 @@ marketplace/static/img/prettyPhoto/light_square/btnPrevious.png
 marketplace/static/img/prettyPhoto/light_square/default_thumbnail.gif
 marketplace/static/img/prettyPhoto/light_square/loader.gif
 marketplace/static/img/prettyPhoto/light_square/sprite.png
+marketplace/static/img/product/vitaminc300.jpg
 marketplace/static/img/social/facebook.png
 marketplace/static/img/social/linkedin.png
 marketplace/static/img/social/twitter.png

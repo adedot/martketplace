@@ -19,6 +19,7 @@ from ..models.users import User
 from ..models.billing import Card
 from ..models.product import Product
 from ..models.category import Category
+from ..models.cart_item import CartItem
 
 
 def usage(argv):
