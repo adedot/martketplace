@@ -35,3 +35,14 @@ class CartViews(object):
 
         return {'title': page_title, 'cart_items':cart_items, 'cart_subtotal': cart_subtotal }
 
+    def cart_link(self):
+        request = self.request
+
+        cart_subtotal = cart.cart_subtotal(request)
+        print "Subtotal is ", cart_subtotal
+
+        cart_items = cart.get_cart_items(request)
+
+        print "The number of items is ",  cart_items.count()
+
+

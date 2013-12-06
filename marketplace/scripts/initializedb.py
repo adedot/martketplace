@@ -39,16 +39,22 @@ def main(argv=sys.argv):
     DBSession.configure(bind=engine)
     Base.metadata.create_all(engine)
     with transaction.manager:
-
-        category1 = Category(name='Household, Food, & Pets', is_active=True, description="", meta_keywords="", meta_description="")
-        category2 = Category(name='Medicine & Health', is_active=True, description="", meta_keywords="", meta_description="")
+        category1 = Category(name='Household, Food, & Pets', is_active=True, description="", meta_keywords="",
+                             meta_description="")
+        category2 = Category(name='Medicine & Health', is_active=True, description="", meta_keywords="",
+                             meta_description="")
         category3 = Category(name='Beauty', is_active=True, description="", meta_keywords="", meta_description="")
         category4 = Category(name='Baby & Mom', is_active=True, description="", meta_keywords="", meta_description="")
         category5 = Category(name='Vitamins', is_active=True, description="", meta_keywords="", meta_description="")
-        category6 = Category(name='Diet & Fitness', is_active=True, description="", meta_keywords="", meta_description="")
-        categories = [category1,category2, category3, category4, category5, category6]
+        category6 = Category(name='Diet & Fitness', is_active=True, description="", meta_keywords="",
+                             meta_description="")
+        categories = [category1, category2, category3, category4, category5, category6]
         DBSession.add_all(categories)
 
-        product_1 = Product(name="Vitamin C", categories=[category5])
-        product_2 = Product(name="Vitamin D", categories=[category5])
-        DBSession.add_all([product_1,product_2])
+        pic_dir = settings['picture_directory']
+
+        product_1 = Product(name="Vitamin C", brand="Ade's Store", sku="12321323", price=20.99, is_active=True, quantity=None,
+                            description="Vitamin C", image=pic_dir+"vitaminc300.jpg", categories=[category2,category5])
+        product_2 = Product(name="Vitamin D", brand="", sku="4343243243", price=20.99, is_active=True, quantity=None,
+                            description="Vitamin D", image=pic_dir+"vitamind.jpg", categories=[category2,category5])
+        DBSession.add_all([product_1, product_2])

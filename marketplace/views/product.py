@@ -82,7 +82,7 @@ class ProductViews(object):
         for line in form.image.data.file:
             destination.write(line)
         destination.close()
-        form.image.data = form.image.data
+        form.image.data = image_file
         product.image = form.image.data
         print "The file name is ", form.image.data
 
@@ -92,25 +92,25 @@ class ProductViews(object):
     def product_edit(self):
         id = int(self.request.params.get('id', -1))
         product = Product.by_id(id)
-        print product.categories
-
 
         if not product:
             return HTTPNotFound()
 
-        category_list = []
-
-        for category in product.categories:
-            category_list.append(category.name)
-
         form = ProductUpdateForm(self.request.POST, product)
-        form.categories.data = category_list
+        if product.categories:
+
+            category_list = []
+
+            for category in product.categories:
+                category_list.append(category.name)
+
+            form.categories.data = category_list
 
         if self.request.method == 'POST' and form.validate():
 
             print "\n\nImage data is: ", form.image.data
 
-            if form.image.data:
+            if form.image.data.filename:
                 self.write_picture_to_file(form, product)
 
             if form.categories.data:
