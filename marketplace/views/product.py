@@ -16,6 +16,14 @@ class ProductViews(object):
     def __init__(self, request):
         self.request = request
         #Use base layout
+
+        cart_subtotal = cart.cart_subtotal(request)
+        print "Subtotal is ", cart_subtotal
+
+        cart_items = cart.get_cart_items(request)
+
+        print "The number of items is ",  cart_items.count()
+
         renderer = get_renderer("marketplace:templates/layout.mako")
 
     @view_config(route_name='home', renderer='marketplace:templates/index.mako')

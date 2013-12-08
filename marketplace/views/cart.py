@@ -1,5 +1,9 @@
 from marketplace.views import *
 from marketplace.utils import cart
+from pyramid.renderers import render_to_response
+
+from pyramid.renderers import render
+from pyramid.response import Response
 
 class CartViews(object):
     # Add checkout
@@ -33,16 +37,7 @@ class CartViews(object):
         print "The number of items is ",  cart_items.count()
         page_title = 'Shopping Cart'
 
+        request.session['count'] = cart_items.count()
+        request.session['sub_total'] = cart_subtotal
         return {'title': page_title, 'cart_items':cart_items, 'cart_subtotal': cart_subtotal }
-
-    def cart_link(self):
-        request = self.request
-
-        cart_subtotal = cart.cart_subtotal(request)
-        print "Subtotal is ", cart_subtotal
-
-        cart_items = cart.get_cart_items(request)
-
-        print "The number of items is ",  cart_items.count()
-
 

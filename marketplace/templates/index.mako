@@ -18,7 +18,7 @@
         </form>
 
         <br />
-        <h1>Get your food, drugs, and vitamins using Okada</h1>
+        <h1>Get your drugs and vitamins at Davis Drugs</h1>
 
         <br />
 

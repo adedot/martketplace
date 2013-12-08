@@ -18,8 +18,9 @@
     <link rel="stylesheet" href="${request.static_url('marketplace:static/css/font-awesome.css')}">
     
     <link rel="stylesheet" href="${request.static_url('marketplace:static/css/sidebar-nav.css')}">
+    <!-- Check navbar -->
     <link rel="stylesheet" href="${request.static_url('marketplace:static/css/style.css')}">
-    <link rel="stylesheet" href="${request.static_url('marketplace:static/css/red-blue.css')}">
+    <link rel="stylesheet" href="${request.static_url('marketplace:static/css/black-red.css')}">
       <!-- JS -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <!-- Bootstrap 3 -->
@@ -74,12 +75,8 @@
 			</form>
 
           <div class="hlinks">
-            <span>
-
-              <!-- item details with price -->
-              <a href="${request.route_url('cart')}" role="button" data-toggle="modal">3 Item(s) in your <i class="icon-shopping-cart"></i></a> -<span class="bold">$25</span>
-
-            </span>
+           <!-- Use cart link -->
+            <%include file="marketplace:templates/cart_link.mako"/>
 
             <span>
 
@@ -116,15 +113,15 @@
 				</div>
 				          <!-- Logo. Use class "color" to add color to the text. -->
                   <div class="logo">
-                    <h1><a href="${request.route_url('home')}">Okada <span class="color bold">Market Place</span></a></h1>
+                    <h1><a href="${request.route_url('home')}"><span class="color bold">Davis Drug</span></a></h1>
 
                   </div>
 
                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                  <ul class="nav navbar-nav">
                    <li><a href="${request.route_url('home')}"><i class="icon-home"></i></a></li>
-                   <li><a href="support.html">Food</a></li>
-                   <li><a href="contact.html">Pharmacy</a></li>
+                   <li><a href="#">Food</a></li>
+                   <li><a href="#">Pharmacy</a></li>
                    <li><a href="#">Vitamins</a></li>
                  </ul>
                </nav>

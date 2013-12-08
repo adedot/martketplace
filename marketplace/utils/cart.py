@@ -126,6 +126,9 @@ def empty_cart(request):
     DBSession.query(CartItem).filter(CartItem.cart_id ==_cart_id(request)).delete()
     DBSession.flush()
 
+    request.session['count'] = 0
+    request.session['sub_total'] = 0.0
+
 #def remove_old_cart_items():
 #    """ 1. calculate date of 90 days ago (or session lifespan)
 #    2. create a list of cart IDs that haven't been modified

@@ -1,19 +1,19 @@
-/* Red Color */
+/* Red Color original cod: f25758*/
 
 a, a:visited{
 	color: #df4c4d;
 }
 
 a:hover{
-	color: #f25758;
+	color: #E33131; /* red */
 }
 
 .color{
-	color: #f25758;
+	color: #141D21; /* black */
 }
 
 .button a, .button a:visited{
-background:#f25758;
+background:#E33131;
 }
 
 .button a:hover{
@@ -21,16 +21,36 @@ background:#df4c4d;
 }
 
 /* Header */
+header {
+background: #141D21;
+color: #141d21;
+}
+
+header .container{
+background: #141D21;
+color: #141d21;
+}
+
+.btn-large {
+
+background: #E33131;
+
+}
+
+.btn-large a:hover{
+    background: #E33131;
+    color: #E33131;
+}
 
 header .hlinks > span{
-background: #f25758;
-border: 1px solid #df4c4d;
+    background: #E33131;
+    border: 1px solid #df4c4d;
 }
 
 /* Navigation */
 
 .navbar{
-	background:#f25758;
+	background:#E33131;
 	border-top: 1px solid #df4c4d;
 	border-bottom: 1px solid #df4c4d;
 }
@@ -44,7 +64,7 @@ border: 1px solid #df4c4d;
 }
 
 .navbar .nav{
-  border-left: 1px solid #df4c4d;
+  border-left: 1px solid #df4c4d;	
 }
 
 .navbar .nav > li > a{
@@ -61,11 +81,11 @@ border: 1px solid #df4c4d;
 }
 
 .dropdown-toggle{
-	background: #f25758 !important;
+	background: #E33131 !important;	
 }
 
 .nav-collapse .nav > li > a{
-	background: #f25758 !important;
+	background: #E33131 !important;	
 }
 
 .nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
@@ -74,32 +94,32 @@ border: 1px solid #df4c4d;
 
 /* Sidebar nav */
 
-#nav > li > a {
- border-left: 3px solid #f25758;
+#nav > li > a { 
+ border-left: 3px solid #E33131;
 }
 
 /* Sidebar page navigation */
 
-#navi > li > a {
- border-left: 3px solid #f25758;
+#navi > li > a { 
+ border-left: 3px solid #E33131;
 }
 
 
 /* Title */
 
 .title i{
-	color: #f25758;
+	color: #E33131;
 }
 
 
 /* Recent posts carousel */
 
 .recent-posts .carousel_nav i{
-	background: #f25758;
+	background: #E33131;	
 }
 
 .recent-posts .rp-details{
-	background: #f25758;
+	background: #E33131;
 	border-top: 1px solid #df4c4d;
 	border-bottom: 1px solid #df4c4d;
 }
@@ -111,7 +131,7 @@ border: 1px solid #df4c4d;
 /* Blog */
 
 .posts .tags a{
-background:#f25758;
+background:#E33131;
 border:1px solid #df4c4d;
 }
 
@@ -121,33 +141,33 @@ border:1px solid #df4c4d;
 }
 
 .paging a:hover{
-background: #f25758;
+background: #E33131;
 border:1px solid #df4c4d;
 }
 
 .paging .current{
-background: #f25758;
+background: #E33131;
 border:1px solid #df4c4d;
 }
 
 /* Sidebar */
 
 .sidebar .widget{
-	border-top: 1px solid #f25758;
+	border-top: 1px solid #E33131;
 }
 
 
 /* Career */
 
 .nav-tabs > li > a:hover{
-	background: #f25758;
+	background: #E33131;
 }
 
 
 /* Back to top */
 
 .totop a, .totop a:visited{
-	background: #f25758;
+	background: #E33131;
 }
 
 .totop a:hover{
@@ -157,5 +177,5 @@ border:1px solid #df4c4d;
 /* Footer */
 
 footer{
-	border-top: 4px solid #f25758;
+	border-top: 4px solid #E33131;
 }
