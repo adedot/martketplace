@@ -13,9 +13,9 @@
   </i></a> <span class="bold">
 
    % if 'sub_total' in request.session:
-        ${request.session['sub_total']}
+       $ ${request.session['sub_total']}
    %else:
-        0
+       $ 0
     %endif
     </span>
 </span>

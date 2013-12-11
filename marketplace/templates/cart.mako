@@ -4,13 +4,13 @@
 
 <div class="span5"> <!--  Content-->
     <div class="input-group">
-<table summary="Your Shopping Cart" id="shopping_cart">
+<table class="table-striped" width="100%" cellpadding="5" cellspacing="5" summary="Your Shopping Cart" id="shopping_cart">
 		<caption>Your Shopping Cart</caption>
-		<thead>
+		<thead >
 			<tr>
 				<th scope="col">Product</th>
 				<th scope="col">Price</th>
-				<th></th>
+				<th scope="col">Quantity</th>
 				<th></th>
 				<th></th>
 				<th scope="col" class="right">Total</th>
@@ -28,11 +28,11 @@
 			% if cart_items:
 			<tr>
 				<th class="right" colspan="6">
-					<form method="GET" action="${request.route_url('checkout')}">
+					<form  method="GET" action="${request.route_url('checkout')}">
     					<input type="hidden" name="submit" value="Checkout" />
 
               
-              		<input type="submit" value="Checkout" alt="Checkout" />
+              		<input class="btn btn-large" type="submit" value="Checkout" alt="Checkout" />
     				</form>
 				</th>
 			</tr>
@@ -48,13 +48,12 @@
 						</a>
 					</td>
 					<td>${ item.product.price }</td>
-					<td class="right">
-						<form method="post" action="${request.route_url('cart')}">
-							<label for="quantity">Quantity:</label>
-							<input type="text" name="quantity" value="${ item.quantity }" id="quantity" size="2" class="quantity" maxlength="5" />
-							<input type="hidden" name="item_id" value="${ item.product.id }" />
-					</td>
 					<td>
+						<form method="post" action="${request.route_url('cart')}">
+							<input type="text" name="quantity" value="${ item.quantity }" id="quantity" size="2" class="quantity" maxlength="5" />
+					</td>
+					<td class="center">
+					    <input type="hidden" name="item_id" value="${ item.product.id }" />
 						<input type="submit" name="submit" value="Update" />
 						</form>
 					</td>
@@ -77,7 +76,11 @@
 		</tbody>
 
 
+
+
 	</table>
+
+</form>
 
    </div>
 

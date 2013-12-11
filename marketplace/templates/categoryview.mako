@@ -14,8 +14,8 @@
     </div>
 </div> <!-- End of Content -->
 <!-- Product Results-->
-<div class="span5"> 
-    <h1 class="left">Product Results</h1>
+<div class="span5">
+    <h1 class="left">Products for ${category}</h1>
     <ul class="nav nav-pills nav-stacked">
      % for product in products:
    <li> <p><b>${product.name}</b> <a href="${request.route_url('product', id=product.id, slug=product.slug)}">
@@ -25,4 +25,5 @@
     % endfor
     </ul>
 </div>
+
 

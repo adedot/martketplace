@@ -18,7 +18,7 @@
         </form>
 
         <br />
-        <h1>Get your drugs and vitamins at Davis Drugs</h1>
+        <h1>Get your drugs and vitamins at Davi Marketplace</h1>
 
         <br />
 

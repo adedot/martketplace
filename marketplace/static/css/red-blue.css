@@ -9,7 +9,7 @@ a:hover{
 }
 
 .color{
-	color: #5eb2d9;
+	color: #E33131; /* red */
 }
 
 .button a, .button a:visited{
@@ -22,7 +22,12 @@ background: #4f99bc;
 
 /* Header */
 header{
-background: #5eb2d9;
+background: #E33131;
+}
+
+header .container{
+background: #E33131;
+
 }
 
 header .hlinks > span{
@@ -30,12 +35,17 @@ background: #5eb2d9;
 border: 1px solid #4f99bc;
 }
 
+.btn-large {
+
+background: #5eb2d9;
+
+}
 
 
 /* Navigation */
 
 .navbar{
-background:#fff;
+background: #5eb2d9;
 border-top: 1px solid #4f99bc;
 border-bottom: 1px solid #4f99bc;
 }

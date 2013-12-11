@@ -4,7 +4,7 @@ import transaction
 from pyramid import testing
 
 from .models import DBSession
-
+from models.product import Product
 
 class TestMyView(unittest.TestCase):
     def setUp(self):
@@ -12,8 +12,7 @@ class TestMyView(unittest.TestCase):
         from sqlalchemy import create_engine
         engine = create_engine('sqlite://')
         from .models import (
-            Base,
-            Product
+            Base
             )
         DBSession.configure(bind=engine)
         Base.metadata.create_all(engine)

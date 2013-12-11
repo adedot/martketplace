@@ -6,7 +6,7 @@
     <div class="input-group">
         <form action="${request.route_url('product', id=product.id, slug=product.slug)}" method="post">
         <p>
-        <img src="${product.image}" height="200" width="300" />
+        <img src="${product.image}" height="200" />
         </p>
         <p>Name: <b>${product.name}</b></p>
         <p>Brand: <b>${product.brand}</b></p>

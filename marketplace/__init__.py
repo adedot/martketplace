@@ -39,6 +39,9 @@ def main(global_config, **settings):
     config.add_route('product', '/product/{id:\d+}/{slug}')
     config.add_route('product_action', '/product/{action}')
 
+    # Category Routes
+    config.add_route('category', '/category/{id:\d+}/{slug}')
+
     # Cart Routes
     config.add_route('cart', '/cart')
 

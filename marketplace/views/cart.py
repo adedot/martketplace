@@ -6,8 +6,6 @@ from pyramid.renderers import render
 from pyramid.response import Response
 
 class CartViews(object):
-    # Add checkout
-    # Add to cart
 
     def __init__(self, request):
         self.request = request

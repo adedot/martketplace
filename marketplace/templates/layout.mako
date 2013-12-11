@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="${request.static_url('marketplace:static/css/sidebar-nav.css')}">
     <!-- Check navbar -->
     <link rel="stylesheet" href="${request.static_url('marketplace:static/css/style.css')}">
-    <link rel="stylesheet" href="${request.static_url('marketplace:static/css/black-red.css')}">
+    <link rel="stylesheet" href="${request.static_url('marketplace:static/css/red.css')}">
       <!-- JS -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <!-- Bootstrap 3 -->
@@ -60,6 +60,11 @@
           <a href="#"><i class="icon-google-plus google-plus"></i></a>
         </div>
 
+                <!-- Logo. Use class "color" to add color to the text. -->
+                  <div class="logo">
+                    <h1><a href="${request.route_url('home')}">Davy <span class="color bold">Marketplace</span></a></h1>
+
+                  </div>
         </div>
 
         <div class="col-md-5 col-md-offset-3 pull-right">
@@ -70,8 +75,7 @@
 				<input type="email" class="form-control" id="email" placeholder="Email Address">
 			  </div>
 
-
-			  <button type="submit" class="btn btn-default">Subscribe</button>
+			  <button type="submit" class="btn btn-large">Subscribe</button>
 			</form>
 
           <div class="hlinks">
@@ -111,18 +115,15 @@
 				  </button>
 
 				</div>
-				          <!-- Logo. Use class "color" to add color to the text. -->
-                  <div class="logo">
-                    <h1><a href="${request.route_url('home')}"><span class="color bold">Davis Drug</span></a></h1>
 
-                  </div>
 
                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                  <ul class="nav navbar-nav">
                    <li><a href="${request.route_url('home')}"><i class="icon-home"></i></a></li>
-                   <li><a href="#">Food</a></li>
-                   <li><a href="#">Pharmacy</a></li>
-                   <li><a href="#">Vitamins</a></li>
+                   <li><a href="${request.route_url('category', id=1, slug='household')}">Household, Food, & Pets</a></li>
+                   <li><a href="${request.route_url('category', id=2, slug='medicine')}">Medicine & Health</a></li>
+                   <li><a href="${request.route_url('category', id=3, slug='vitamins')}">Vitamins</a></li>
+                   <!-- li><a href="${request.route_url('category', id=4, slug='diet')}">Diet & Fitness</a></li -->
                  </ul>
                </nav>
               </div>

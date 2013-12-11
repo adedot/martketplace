@@ -12,16 +12,16 @@ from sqlalchemy import (
 
 
 class Category(Base):
-
     __tablename__ = 'category'
     id = Column(Integer, primary_key=True)
     name = Column(String(255), unique=True)
-    slug = Column('slug', String(255), unique=True) # Unique value for product page URL, created automatically from name.
-    is_active = Column(Boolean,default=True)
+    slug = Column('slug', String(255),
+                  unique=True) # Unique value for product page URL, created automatically from name.
+    is_active = Column(Boolean, default=True)
     description = Column(Text)
     meta_keywords = Column(String(255)) # Comma-delimited set of SEO keywords for keywords meta tag')
     meta_description = Column(String(255)) # Content for description meta tag
-    created_at = Column(Date,default=datetime.datetime.utcnow)
+    created_at = Column(Date, default=datetime.datetime.utcnow)
     updated_at = Column(Date, default=datetime.datetime.utcnow)
 
     def __init__(self, name, is_active, description, meta_keywords, meta_description):
@@ -32,6 +32,9 @@ class Category(Base):
         self.meta_description = meta_description
 
 
+    @classmethod
+    def by_id(cls, id):
+        return DBSession.query(Category).filter(Category.id == id).first()
 
     @classmethod
     def names(cls):
