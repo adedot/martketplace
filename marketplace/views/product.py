@@ -32,7 +32,7 @@ class ProductViews(object):
     # Featured Products
         products = Product.all()
 
-        return dict(title="Davi MarketPlace", products=products)
+        return dict(title="Davy MarketPlace", products=products)
 
     @view_config(route_name='product_action', match_param='action=create', renderer='marketplace:templates/productaddedit.mako')
     def product_create(self):
