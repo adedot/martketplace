@@ -11,6 +11,7 @@
                 <table>
               <p> Email:        ${form.email()} </p>
                <p>Phone:        ${form.phone()} </p>
+               <p>Rx/Prescription Number:   ${form.prescription_number()} </p>
 		</table>
 	</fieldset>
 
@@ -29,13 +30,13 @@
 		<fieldset class="checkout">
 		<legend>Shipping Info</legend>
 		<table>
-		<p> :${form.shipping_name()} </p>
-		<p> :${form.shipping_address_1()} </p>
-		<p> :${form.shipping_address_2()} </p>
-		<p> :${form.shipping_city()} </p>
-		<p> :${form.shipping_state()} </p>
-		<p> :${form.shipping_zip()} </p>
-		<p> :${form.shipping_country()} </p>
+		<p> Name:   ${form.shipping_name()} </p>
+		<p> Address Line #1:    ${form.shipping_address_1()} </p>
+		<p> Address Line #2:    ${form.shipping_address_2()} </p>
+		<p> City:   ${form.shipping_city()} </p>
+		<p> State:  ${form.shipping_state()} </p>
+		<p> Zipcode:    ${form.shipping_zip()} </p>
+		<p> Country:    ${form.shipping_country()} </p>
 		</table>
 	</fieldset>
 

@@ -19,6 +19,8 @@ class BaseOrderInfo(Base):
     # contact info
     email = Column(String(50))
     phone = Column(String(20))
+    prescription_number = Column(String(30))
+
 
     #shipping information
     shipping_name = Column(String(50))
@@ -38,7 +40,7 @@ class BaseOrderInfo(Base):
     billing_country = Column(String(50))
     billing_zip = Column(String(10))
 
-class Order(Base):
+class Order(BaseOrderInfo):
     """ model class for storing a customer order instance """
     # each individual status
     __tablename__ = "order"

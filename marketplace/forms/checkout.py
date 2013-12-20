@@ -18,7 +18,8 @@ def strip_non_numbers(data):
 
 class CheckoutForm(Form):
     email = TextField("email", validators=[Email()])
-    phone = TextField("phone")
+    phone = TextField("phone", [Required()])
+    prescription_number = TextField("prescription_number")
 
     #Billing Information
     billing_name = TextField("billing_name", [Required()])

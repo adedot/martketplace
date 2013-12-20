@@ -2,6 +2,7 @@ from pyramid.response import Response
 from marketplace.views import *
 from marketplace.forms.product import ProductAddForm, SearchForm, ProductUpdateForm, AddProductToCartForm
 import os
+from wtforms import FileField
 
 from marketplace.utils import cart
 
@@ -113,6 +114,10 @@ class ProductViews(object):
                 category_list.append(category.name)
 
             form.categories.data = category_list
+        #if product.image:
+        #    form.image = FileField("image")
+        #    form.image.data = product.image
+        #    form.image.data.filename = product.image
 
         if self.request.method == 'POST' and form.validate():
 
