@@ -12,7 +12,7 @@ class CartViews(object):
         #Use base layout
         renderer = get_renderer("marketplace:templates/layout.mako")
 
-    @view_config(route_name='cart', renderer='marketplace:templates/cart.mako')
+    @view_config(route_name='cart', renderer='marketplace:templates/cart/cart.mako')
     def show_cart(self):
 
         request = self.request

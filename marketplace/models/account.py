@@ -8,6 +8,8 @@ from sqlalchemy import (
     Integer,
     Unicode,
     )
+# Add users
+
 
 class User(Base):
     __tablename__ = 'user'
@@ -22,3 +24,6 @@ class User(Base):
 
     def verify_password(self, password):
         return self.password == password
+
+
+# Add User Profiles

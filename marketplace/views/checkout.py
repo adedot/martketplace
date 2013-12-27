@@ -15,7 +15,7 @@ class CheckoutViews(object):
         #Use base layout
         renderer = get_renderer("marketplace:templates/layout.mako")
 
-    @view_config(route_name='checkout', renderer='marketplace:templates/checkout.mako')
+    @view_config(route_name='checkout', renderer='marketplace:templates/checkout/checkout.mako')
     def show_checkout(self):
 
         request = self.request
@@ -58,7 +58,7 @@ class CheckoutViews(object):
 
         return {'form':form, 'title':"Checkout"}
 
-    @view_config(route_name='checkout_receipt', renderer='marketplace:templates/receipt.mako')
+    @view_config(route_name='checkout_receipt', renderer='marketplace:templates/checkout/receipt.mako')
     def receipt(self):
         """ page displayed with order information after an order has been placed successfully """
         order_number = self.request.session.get('order_number','')

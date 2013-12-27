@@ -80,7 +80,7 @@
 
           <div class="hlinks">
            <!-- Use cart link -->
-            <%include file="marketplace:templates/cart_link.mako"/>
+            <%include file="marketplace:templates/cart/cart_link.mako"/>
 
             <span>
 
@@ -201,7 +201,7 @@
 
             <hr />
             <!-- Copyright info -->
-            <p class="copy">Copyright &copy; 2012 | <a href="#">Your Site</a> - <a href="#">Home</a> | <a href="#">About Us</a> | <a href="#">Service</a> | <a href="#">Contact Us</a></p>
+            <p class="copy">Copyright &copy; 2012 |  <a href="${request.route_url('home')}">Home</a> | <a href="#">About Us</a> | <a href="#">Contact Us</a></p>
       </div>
     </div>
   <div class="clearfix"></div>

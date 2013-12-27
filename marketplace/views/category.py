@@ -18,7 +18,7 @@ class CategoryViews(object):
         #Use base layout
         renderer = get_renderer("marketplace:templates/layout.mako")
 
-    @view_config(route_name='category', renderer='marketplace:templates/categoryview.mako')
+    @view_config(route_name='category', renderer='marketplace:templates/category/categoryview.mako')
     def category_view(self):
         id = int(self.request.matchdict.get('id', -1))
         category = Category.by_id(id)

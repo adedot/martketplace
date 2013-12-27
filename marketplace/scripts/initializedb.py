@@ -15,7 +15,7 @@ from ..models import (
 
     )
 from ..models.checkout import Order, OrderItem
-from ..models.users import User
+from ..models.account import User
 from ..models.billing import Card
 from ..models.product import Product
 from ..models.category import Category

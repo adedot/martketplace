@@ -35,7 +35,7 @@ class ProductViews(object):
 
         return dict(title="Davy MarketPlace", products=products)
 
-    @view_config(route_name='product_action', match_param='action=create', renderer='marketplace:templates/productaddedit.mako')
+    @view_config(route_name='product_action', match_param='action=create', renderer='marketplace:templates/product/productaddedit.mako')
     def product_create(self):
         product = Product()
         form = ProductAddForm(self.request.POST)
@@ -56,7 +56,7 @@ class ProductViews(object):
             return HTTPFound(location=self.request.route_url('home'))
         return {'form':form, 'title':"Add Product",'action':self.request.matchdict.get('action')}
 
-    @view_config(route_name='product', renderer='marketplace:templates/productview.mako')
+    @view_config(route_name='product', renderer='marketplace:templates/product/productview.mako')
     def product_view(self):
         id = int(self.request.matchdict.get('id', -1))
         product = Product.by_id(id)
@@ -97,7 +97,7 @@ class ProductViews(object):
 
         #product.image = form.image.data
 
-    @view_config(route_name='product_action', match_param='action=edit', renderer='marketplace:templates/productaddedit.mako')
+    @view_config(route_name='product_action', match_param='action=edit', renderer='marketplace:templates/product/productaddedit.mako')
     def product_edit(self):
         id = int(self.request.params.get('id', -1))
         product = Product.by_id(id)
@@ -114,10 +114,7 @@ class ProductViews(object):
                 category_list.append(category.name)
 
             form.categories.data = category_list
-        #if product.image:
-        #    form.image = FileField("image")
-        #    form.image.data = product.image
-        #    form.image.data.filename = product.image
+
 
         if self.request.method == 'POST' and form.validate():
 
@@ -145,7 +142,7 @@ class ProductViews(object):
             print form.errors
         return {'form':form, 'title':"Edit Product", 'action':self.request.matchdict.get('action')}
 
-    @view_config(route_name='product_action', match_param='action=search', renderer='marketplace:templates/search.mako')
+    @view_config(route_name='product_action', match_param='action=search', renderer='marketplace:templates/product/search.mako')
     def product_search(self):
 
         products = Product.all()
