@@ -4,20 +4,15 @@
 <!-- Add login Form-->
 <div class="span5">
     <hr>
-    <h4>Login</h4>
-    <span tal:replace="message"/>
+    <h4>User Login</h4>
 
-    <form action="${url}" method="post">
-        <input type="hidden" name="came_from"
-               value="${came_from}"/>
-        <label for="login">Username</label>
-        <input type="text" id="login"
-               name="login"
-               value="${login}"/><br/>
+
+    <form action="." method="post">
+
+        <label for="login">Email</label>
+        <p> ${form.email()} </p><br/>
         <label for="password">Password</label>
-        <input type="password" id="password"
-               name="password"
-               value="${password}"/><br/>
+        <p> ${form.password()} </p>
         <input type="submit" name="form.submitted"
                value="Log In"/>
     </form>

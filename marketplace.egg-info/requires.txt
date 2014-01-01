@@ -10,3 +10,4 @@ zope.sqlalchemy
 waitress
 wtforms
 webhelpers
+cryptacular

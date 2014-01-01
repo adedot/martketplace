@@ -49,6 +49,12 @@ def main(global_config, **settings):
     config.add_route('checkout', '/checkout')
     config.add_route('checkout_receipt', '/receipt')
 
+    # Account Registration/Login/Logout
+    config.add_route('login', '/login')
+    #config.add_route('logout', '/logout')
+    config.add_route('register', '/register')
+    #config.add_route('add_card')
+
 
     # Sign authorization - added later
     config.add_route('auth', '/sign/{action}')

@@ -9,21 +9,47 @@ from sqlalchemy import (
     Unicode,
     )
 # Add users
+import cryptacular.bcrypt
+from sqlalchemy.orm import synonym
 
+crypt = cryptacular.bcrypt.BCRYPTPasswordManager()
+
+def hash_password(password):
+    return unicode(crypt.encode(password))
 
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
-    name = Column(Unicode(255), unique=True, nullable=False)
-    password = Column(Unicode(255), nullable=False)
+    email = Column(Unicode(255), unique=True, nullable=False)
     last_logged = Column(DateTime, default=datetime.datetime.utcnow)
 
-    @classmethod
-    def by_name(cls, name):
-        return DBSession.query(User).filter(User.name == name).first()
+    _password = Column('password', Unicode(60))
 
-    def verify_password(self, password):
-        return self.password == password
+    def _get_password(self):
+        return self._password
+
+    def _set_password(self, password):
+        self._password = hash_password(password)
+
+    password = property(_get_password, _set_password)
+    password = synonym('_password', descriptor=password)
+
+
+    def __init__(self, email, password ):
+        self.email = email
+        self.password = password
+        self.last_logged = datetime.datetime.now()
+
+    @classmethod
+    def by_email(cls, email):
+        return DBSession.query(User).filter(User.email == email).first()
+
+    @classmethod
+    def check_password(cls, username, password):
+        user = cls.get_by_username(username)
+        if not user:
+            return False
+        return crypt.check(user.password, password)
 
 
 # Add User Profiles

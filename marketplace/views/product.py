@@ -1,8 +1,7 @@
-from pyramid.response import Response
+
 from marketplace.views import *
 from marketplace.forms.product import ProductAddForm, SearchForm, ProductUpdateForm, AddProductToCartForm
 import os
-from wtforms import FileField
 
 from marketplace.utils import cart
 

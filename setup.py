@@ -18,7 +18,8 @@ requires = [
     'zope.sqlalchemy',
     'waitress',
     'wtforms',
-    'webhelpers'
+    'webhelpers',
+    'cryptacular'
     ]
 
 setup(name='marketplace',
