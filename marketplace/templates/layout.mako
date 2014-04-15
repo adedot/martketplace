@@ -62,7 +62,7 @@
 
                 <!-- Logo. Use class "color" to add color to the text. -->
                   <div class="logo">
-                    <h1><a href="${request.route_url('home')}">Davy <span class="color bold">Marketplace</span></a></h1>
+                    <h1><a href="${request.route_url('home')}">Allen Ikeja <span class="color bold">Marketplace</span></a></h1>
 
                   </div>
         </div>
@@ -90,7 +90,7 @@
 
 
               <!-- Login and Register link -->
-              <span class="lr"><a href="#login" role="button" data-toggle="modal">Login</a> or <a href="#register" role="button" data-toggle="modal">Register</a></span>
+              <span class="lr"><a href="${request.route_url('login')}" role="button" data-toggle="modal">Login</a> or <a href="${request.route_url('register')}" role="button" data-toggle="modal">Register</a></span>
 
           </div>
 
@@ -106,7 +106,6 @@
           <div class="navbar bs-docs-nav" role="banner">
 
              <div class="container">
-               <div class="navbar-header">
 				  <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
 					<span class="sr-only">Toggle navigation</span>
 					<span class="icon-bar"></span>

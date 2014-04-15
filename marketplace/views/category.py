@@ -26,4 +26,4 @@ class CategoryViews(object):
         print "The Category is: ", category.name
         products = DBSession.query(Product).filter(Product.categories.any(Category.name==category.name)).all()
 
-        return dict(title="Okada MarketPlace", category=category.name, products=products)
+        return dict(title="Allen Ikeja MarketPlace", category=category.name, products=products)

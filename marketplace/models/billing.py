@@ -9,7 +9,7 @@ class Card(Base):
 
     data = Column(Text)
     user_id = Column(Integer, ForeignKey("user.id"),primary_key=True)
-    user = relationship('User', backref="orders")
+    user = relationship('User', backref="card")
     num = Column(String(4))
 
     @property

@@ -1,7 +1,7 @@
 __author__ = 'owner'
 
 from marketplace.models import * # To use all the settings in the models package
-
+from marketplace.models.checkout import BaseOrderInfo
 from sqlalchemy import (
     Column,
     DateTime,
@@ -52,4 +52,11 @@ class User(Base):
         return crypt.check(user.password, password)
 
 
+
+
 # Add User Profiles
+class UserProfile(BaseOrderInfo):
+    __tablename__ = 'user_profile'
+
+    id = Column(Integer, ForeignKey("user.id"),primary_key=True)
+    user = relationship('User', backref="user_profiles")

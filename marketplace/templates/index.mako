@@ -10,7 +10,7 @@
 
         <form class="form-inline" role="form" action="${request.route_url('product_action',action='search')}" method="post" name="search">
             <div class="form-group">
-				<input type="query" class="form-control" id="search" placeholder="Search food, drugs, vitamins">
+				<input type="query" class="form-control" id="search" placeholder="Search cakes, snacks, and electronics">
 			  </div>
 
 
@@ -18,7 +18,7 @@
         </form>
 
         <br />
-        <h1>Get your drugs and vitamins at Davy Marketplace</h1>
+        <h1>Get your food at Allen Ikeja Marketplace</h1>
 
         <br />
 
