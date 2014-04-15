@@ -11,6 +11,7 @@ import decimal
 from marketplace.models import * # To use all the settings in the models package
 from marketplace.models.product import Product
 from marketplace.models.category import Category
+from sqlalchemy.schema import ForeignKeyConstraint
 
 
 class BaseOrderInfo(Base):
@@ -55,7 +56,7 @@ class Order(BaseOrderInfo):
                       (SHIPPED,'Shipped'),
                       (CANCELLED,'Cancelled'),)
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, unique=True)
 
     #order info
     date = Column(DateTime)
@@ -92,12 +93,17 @@ class OrderItem(Base):
     __tablename__ = "order_item"
     """ model class for storing each Product instance purchased in each order """
 
-    product_id = Column(Integer,  ForeignKey('product.id'), primary_key=True)
-    product = relationship('Product', backref="order_items") # Cart can have many products
+
+    order_id = Column(Integer, primary_key=True)
+    order = relationship('Order', primaryjoin=order_id==Order.id, foreign_keys=[Order.id],backref="order_items")
+
+    product_id = Column(Integer, primary_key=True)
+    product = relationship('Product', primaryjoin=product_id==Product.id, foreign_keys=[Product.id], backref="order_items") # Cart can have many products
     quantity = Column(Integer)
     price = Column(DECIMAL(precision=9,scale=2))
-    order_id = Column(Integer,  ForeignKey('order.id'), primary_key=True)
-    order = relationship('Order', backref="order_items")
+
+    #__table_args__ = (ForeignKeyConstraint([order_id, product_id],[Order.id, Product.id]), {})
+
 
     @property
     def total(self):
