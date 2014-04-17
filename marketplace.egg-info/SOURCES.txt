@@ -6,6 +6,7 @@ braintree_sanbox_credit_card_info.txt
 development-aws.ini
 development.ini
 production.ini
+requirements.txt
 setup.cfg
 setup.py
 shop_sql.txt

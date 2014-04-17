@@ -60,7 +60,7 @@ class Order(BaseOrderInfo):
 
     #order info
     date = Column(DateTime)
-    status = Column(Integer(default=SUBMITTED))
+    status = Column(Integer)
     ip_address = Column(String(16))
     last_updated = Column(DateTime)
     user_id = Column(Integer, ForeignKey("user.id"),primary_key=True)

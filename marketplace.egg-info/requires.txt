@@ -1,4 +1,3 @@
-PyMySQL
 alembic
 braintree
 pyramid

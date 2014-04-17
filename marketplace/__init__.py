@@ -1,7 +1,6 @@
 from pyramid.config import Configurator
 from sqlalchemy import engine_from_config
-from pyramid.view import static
-
+from pyramid.static import static_view
 from pyramid.session import UnencryptedCookieSessionFactoryConfig
 
 from .models import (
