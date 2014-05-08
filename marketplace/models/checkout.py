@@ -18,9 +18,8 @@ class BaseOrderInfo(Base):
     __abstract__=  True
 
     # contact info
-    email = Column(String(50))
+    email = Column(String(100))
     phone = Column(String(20))
-    prescription_number = Column(String(30))
 
 
     #shipping information
@@ -63,9 +62,9 @@ class Order(BaseOrderInfo):
     status = Column(Integer)
     ip_address = Column(String(16))
     last_updated = Column(DateTime)
-    user_id = Column(Integer, ForeignKey("user.id"),primary_key=True)
-    user = relationship('User', backref="orders")
-    transaction_id = Column(String(20), primary_key=True)
+    #user_id = Column(Integer, ForeignKey("user.id"),primary_key=True, nullable=False)
+    #user = relationship('User', backref="orders")
+    transaction_id = Column(String(30), primary_key=True)
 
     @validates('email')
     def validate_email(self, key, address):
@@ -95,10 +94,10 @@ class OrderItem(Base):
 
 
     order_id = Column(Integer, primary_key=True)
-    order = relationship('Order', primaryjoin=order_id==Order.id, foreign_keys=[Order.id],backref="order_items")
+    order = relationship('Order', primaryjoin=order_id==Order.id, foreign_keys=[Order.id],backref="order_items", uselist=False)
 
     product_id = Column(Integer, primary_key=True)
-    product = relationship('Product', primaryjoin=product_id==Product.id, foreign_keys=[Product.id], backref="order_items") # Cart can have many products
+    product = relationship('Product', primaryjoin=product_id==Product.id, foreign_keys=[Product.id], backref="order_items", uselist=False) # Cart can have many products
     quantity = Column(Integer)
     price = Column(DECIMAL(precision=9,scale=2))
 

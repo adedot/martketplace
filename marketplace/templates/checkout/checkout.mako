@@ -1,6 +1,8 @@
 <!-- extend home base layout -->
 <%inherit file="marketplace:templates/layout.mako"/>
 
+<!-- Adding Stripe js -->
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 
 <div class="span5"> <!--  Content-->
     <div class="input-group">
@@ -10,7 +12,6 @@
                 <table>
               <p> Email:        ${form.email()} </p>
                <p>Phone:        ${form.phone()} </p>
-               <p>Rx/Prescription Number:   ${form.prescription_number()} </p>
                 </table>
             </fieldset>
 

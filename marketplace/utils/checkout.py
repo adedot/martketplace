@@ -1,19 +1,16 @@
 __author__ = 'owner'
 
 import braintree
+
+import stripe
 from marketplace.models.checkout import Order, OrderItem
 from marketplace.utils import cart
 from marketplace.models import DBSession
 
 from datetime import datetime
 
-
-braintree.Configuration.configure(
-    braintree.Environment.Sandbox,
-    "cn92b7xdrk4bgzwn",
-    "2jzzb8hxjsj4jbgw",
-    "4023624c52e3f5413490a53884e449e3"
-)
+# Create stripe keys
+stripe.api_key = "sk_test_AP2VBnLI89bwW8K41ZmYqBHx"
 
 
 def process(request, order):
@@ -38,20 +35,37 @@ def process(request, order):
     cvv = postdata.get('credit_card_cvv', '')
     amount = cart.cart_subtotal(request)
 
-    response = braintree.Transaction.sale({
-        "amount": amount,
-        "credit_card": dict(number=credit_card_number, expiration_month=expiration_month,
-                            expiration_year=expiration_year)
-    })
-    if response.is_success:
-        transaction_id = response.transaction.id
+    # Get stripe token for card
+    token = stripe.Token.create(
+          card={
+            "number": credit_card_number,
+            "exp_month": expiration_month,
+            "exp_year": expiration_year,
+            "cvc": cvv
+          },
+        )
+
+    print int(amount*100)
+
+    charge = stripe.Charge.create(
+      amount=int(amount*100),
+      currency="usd", # I can Change to naira if needed
+      card=token,
+      description="Example charge"
+    )
+    #
+    #charge.capture()
+
+
+    if charge['card']['cvc_check']:
+        transaction_id = charge.id[3:22]
         order = create_order(request, order, transaction_id)
         results = {'order_number': order.id, 'message': u''}
-    elif response.transaction:
-        results = {'order_number': 0, 'message': response.message, 'code': response.transaction.processor_response_code,
-                   'text': response.transaction.processor_response_text}
+    elif charge.balance_transaction:
+        results = {'order_number': 0, 'message': charge.failure_message, 'code': charge.failure_code,
+                   'text': charge.description}
     else:
-        results = {'order_number': 0, 'message':response.message, 'errors': response.errors}
+        results = {'order_number': 0, 'message':charge.failure_message, 'errors': charge.errors}
     return results
 
 
@@ -66,7 +80,7 @@ def create_order(request, order, transaction_id):
     order.transaction_id = transaction_id
     print transaction_id
     #order.ip_address = request.META.get('REMOTE_ADDR')
-    order.user = None
+    #order.user = None
     #if request.user.is_authenticated():
     #    order.user = request.user
     order.status = Order.SUBMITTED
@@ -77,18 +91,20 @@ def create_order(request, order, transaction_id):
     if order:
         """ if the order save succeeded """
         cart_items = cart.get_cart_items(request).all()
-        print "The items in the cart are: ", cart_items
+        print "The items in the cart are: ", len(cart_items)
 
         for ci in cart_items:
             """ create order item for each cart item """
 
             print "The product is ", ci.product
             oi = OrderItem()
+            oi.order_id = order.id
             oi.order = order
             oi.quantity = ci.quantity
-            oi.product = ci.product
             print "The product id is ", ci.product.id
             oi.product_id = ci.product.id
+            oi.product = ci.product
+
             oi.price = ci.price  # now using @property
             DBSession.add(oi)
 
