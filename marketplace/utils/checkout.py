@@ -80,7 +80,7 @@ def create_order(request, order, transaction_id):
     order.transaction_id = transaction_id
     print transaction_id
     #order.ip_address = request.META.get('REMOTE_ADDR')
-    #order.user = None
+    order.user = None
     #if request.user.is_authenticated():
     #    order.user = request.user
     order.status = Order.SUBMITTED

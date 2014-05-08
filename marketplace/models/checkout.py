@@ -62,8 +62,8 @@ class Order(BaseOrderInfo):
     status = Column(Integer)
     ip_address = Column(String(16))
     last_updated = Column(DateTime)
-    #user_id = Column(Integer, ForeignKey("user.id"),primary_key=True, nullable=False)
-    #user = relationship('User', backref="orders")
+    user_id = Column(Integer, ForeignKey("user.id"), nullable=True)
+    user = relationship('User', backref="orders")
     transaction_id = Column(String(30), primary_key=True)
 
     @validates('email')
