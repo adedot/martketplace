@@ -10,8 +10,6 @@ from sqlalchemy.orm import validates
 import decimal
 from marketplace.models import * # To use all the settings in the models package
 from marketplace.models.product import Product
-from marketplace.models.category import Category
-from sqlalchemy.schema import ForeignKeyConstraint
 
 
 class BaseOrderInfo(Base):
@@ -100,9 +98,6 @@ class OrderItem(Base):
     product = relationship('Product', primaryjoin=product_id==Product.id, foreign_keys=[Product.id], backref="order_items", uselist=False) # Cart can have many products
     quantity = Column(Integer)
     price = Column(DECIMAL(precision=9,scale=2))
-
-    #__table_args__ = (ForeignKeyConstraint([order_id, product_id],[Order.id, Product.id]), {})
-
 
     @property
     def total(self):

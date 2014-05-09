@@ -28,29 +28,29 @@ def process(request, order):
     print "I am processing the request"
 
     postdata = request.POST.copy()
-    credit_card_number = postdata.get('credit_card_number', '')
-    expiration_month = postdata.get('credit_card_expire_month', '')
-    expiration_year = postdata.get('credit_card_expire_year', '')
-    exp_date = expiration_month + expiration_year
-    cvv = postdata.get('credit_card_cvv', '')
+    #credit_card_number = postdata.get('credit_card_number', '')
+    #expiration_month = postdata.get('credit_card_expire_month', '')
+    #expiration_year = postdata.get('credit_card_expire_year', '')
+    #exp_date = expiration_month + expiration_year
+    #cvv = postdata.get('credit_card_cvv', '')
     amount = cart.cart_subtotal(request)
 
-    # Get stripe token for card
-    token = stripe.Token.create(
-          card={
-            "number": credit_card_number,
-            "exp_month": expiration_month,
-            "exp_year": expiration_year,
-            "cvc": cvv
-          },
-        )
+    ## Get stripe token for card
+    #token = stripe.Token.create(
+    #      card={
+    #        "number": credit_card_number,
+    #        "exp_month": expiration_month,
+    #        "exp_year": expiration_year,
+    #        "cvc": cvv
+    #      },
+    #    )
 
     print int(amount*100)
 
     charge = stripe.Charge.create(
       amount=int(amount*100),
       currency="usd", # I can Change to naira if needed
-      card=token,
+      card=postdata.get('stripeToken', ''),
       description="Example charge"
     )
     #
