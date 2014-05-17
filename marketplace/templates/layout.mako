@@ -119,9 +119,9 @@
                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                  <ul class="nav navbar-nav">
                    <li><a href="${request.route_url('home')}"><i class="icon-home"></i></a></li>
-                   <li><a href="${request.route_url('category', id=1, slug='household')}">Wine</a></li>
-                   <li><a href="${request.route_url('category', id=2, slug='medicine')}">Cake</a></li>
-                   <li><a href="${request.route_url('category', id=3, slug='vitamins')}">Electronics</a></li>
+                   <li><a href="${request.route_url('category', id=1, slug='wine')}">Wine</a></li>
+                   <li><a href="${request.route_url('category', id=2, slug='cake')}">Cakes</a></li>
+                   <li><a href="${request.route_url('category', id=3, slug='electronics')}">Electronics</a></li>
                    <!-- li><a href="${request.route_url('category', id=4, slug='diet')}">Diet & Fitness</a></li -->
                  </ul>
                </nav>
@@ -141,68 +141,6 @@
 <!-- Footer starts -->
 <footer>
   <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-
-            <div class="row">
-
-              <div class="col-md-4">
-                <div class="widget">
-                  <h5>Contact</h5>
-                  <hr />
-
-                  <hr />
-                  <i class="icon-home"></i> &nbsp; 123, Some Area. Los Angeles, CA, 54321.
-                  <hr />
-                  <i class="icon-phone"></i> &nbsp; +239-3823-3434
-                  <hr />
-                  <i class="icon-envelope-alt"></i> &nbsp; <a href="mailto:#">someone@company.com</a>
-                  <hr />
-                  <div class="payment-icons">
-                    <img src="${request.static_url('marketplace:static/img/payment/americanexpress.gif')}" alt="" />
-                    <img src="${request.static_url('marketplace:static/img/payment/visa.gif')}" alt="" />
-                    <img src="${request.static_url('marketplace:static/img/payment/mastercard.gif')}" alt="" />
-                    <img src="${request.static_url('marketplace:static/img/payment/discover.gif')}" alt="" />
-                    <img src="${request.static_url('marketplace:static/img/payment/paypal.gif')}" alt="" />
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="widget">
-                  <h5>About Us</h5>
-                  <hr />
-                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras elementum dolor eget nisi fermentum quis hendrerit magna vestibulum. Curabitur pulvinar ornare vulputate scelerisque scelerisque ut consectetur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras elementum dolor eget nisi fermentum quis hendrerit magna vestibulum.</p>
-                </div>
-              </div>
-
-              <div class="col-md-4">
-                <div class="widget">
-                  <h5>Links Goes Here</h5>
-                  <hr />
-                  <div class="two-col">
-                    <div class="col-left">
-                      <ul>
-                        <li><a href="#">Condimentum</a></li>
-                        <li><a href="#">Etiam at</a></li>
-                        <li><a href="#">Fusce vel</a></li>
-                        <li><a href="#">Vivamus</a></li>
-                        <li><a href="#">Pellentesque</a></li>
-                        <li><a href="#">Vivamus</a></li>
-                      </ul>
-                    </div>
-                    <div class="clearfix"></div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-
-            <hr />
-            <!-- Copyright info -->
-            <p class="copy">Copyright &copy; 2012 |  <a href="${request.route_url('home')}">Home</a> | <a href="#">About Us</a> | <a href="#">Contact Us</a></p>
-      </div>
-    </div>
   <div class="clearfix"></div>
   </div>
 </footer>

@@ -144,7 +144,12 @@ class ProductViews(object):
     @view_config(route_name='product_action', match_param='action=search', renderer='marketplace:templates/product/search.mako')
     def product_search(self):
 
-        products = Product.all()
+        getdata = self.request.GET.copy()
+
+        print getdata
+        query = getdata['query']
+        print "Searching products for %s" % query
+        products = Product.by_where(query)
 
         form = SearchForm()
 

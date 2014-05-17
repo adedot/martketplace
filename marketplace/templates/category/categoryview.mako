@@ -3,9 +3,9 @@
 
 <div class="span8"> <!--  Content-->
     <div class="input-group">
-        <form class="form-inline" role="form" action="${request.route_url('product_action',action='search')}" method="post" name="search">
+        <form class="form-inline" role="form" action="${request.route_url('product_action',action='search')}" method="GET" name="search">
             <div class="form-group">
-				<input type="query" class="form-control" id="search" placeholder="Search food, drugs, vitamins">
+				<input type="query" class="form-control" id="query" name="query" placeholder="Search wine, cakes, electronics">
 			  </div>
 
 
@@ -19,7 +19,7 @@
     <ul class="nav nav-pills nav-stacked">
      % for product in products:
    <li> <p><b>${product.name}</b> <a href="${request.route_url('product', id=product.id, slug=product.slug)}">
-   <img src="${product.image}" height="100" />
+   <img src="${product.image}" width="140" height="140" />
    </a></p>
     </li>
     % endfor

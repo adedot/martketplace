@@ -76,6 +76,11 @@ class Product(Base):
     def by_id(cls, id):
         return DBSession.query(Product).filter(Product.id == id).first()
 
+    @classmethod
+    def by_where(cls,query):
+        query = "%"+query+"%"
+        return DBSession.query(Product).filter(Product.name.like(query)).order_by(sa.desc(Product.created_at)).all()
+
     @property
     def slug(self):
         return urlify(self.name)
