@@ -119,9 +119,9 @@
                <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
                  <ul class="nav navbar-nav">
                    <li><a href="${request.route_url('home')}"><i class="icon-home"></i></a></li>
-                   <li><a href="${request.route_url('category', id=1, slug='household')}">Household, Food, & Pets</a></li>
-                   <li><a href="${request.route_url('category', id=2, slug='medicine')}">Medicine & Health</a></li>
-                   <li><a href="${request.route_url('category', id=3, slug='vitamins')}">Vitamins</a></li>
+                   <li><a href="${request.route_url('category', id=1, slug='household')}">Wine</a></li>
+                   <li><a href="${request.route_url('category', id=2, slug='medicine')}">Cake</a></li>
+                   <li><a href="${request.route_url('category', id=3, slug='vitamins')}">Electronics</a></li>
                    <!-- li><a href="${request.route_url('category', id=4, slug='diet')}">Diet & Fitness</a></li -->
                  </ul>
                </nav>

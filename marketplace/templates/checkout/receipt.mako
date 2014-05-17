@@ -17,7 +17,7 @@
 		<tfoot>
 			<tr>
 				<td colspan="4" class="right" style="height:30px;">
-				Order Total: ${ order.total}
+				Order Total: ₦${ order.total}
 				</td>
 			</tr>
 		</tfoot>
@@ -25,9 +25,9 @@
 		% for item in order_items:
 		<tr>
 			<td>${ item.name }</td>
-			<td>${ item.price}</td>
+			<td>₦${ item.price}</td>
 			<td>${ item.quantity }</td>
-			<td class="right">${ item.total}</td>
+			<td class="right">₦${ item.total}</td>
 		</tr>
 		% endfor
 		</tbody>

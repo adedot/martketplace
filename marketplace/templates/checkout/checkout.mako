@@ -1,6 +1,7 @@
 <!-- extend home base layout -->
 <%inherit file="marketplace:templates/layout.mako"/>
 
+<script src="${request.static_url('marketplace:static/js/shipping_fields.js')}"></script>
 <!-- Adding Stripe js -->
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
@@ -67,6 +68,10 @@ var stripeResponseHandler = function(status, response) {
                 <p> Country:           ${form.billing_country()} </p>
                 </table>
             </fieldset>
+
+
+              <div id="shipping_fields">
+              <input type="checkbox" id="same_billing_shipping" defaultChecked="false">Same as billing<br>
                 <fieldset class="checkout">
                 <legend>Shipping Info</legend>
                 <table>
@@ -79,6 +84,7 @@ var stripeResponseHandler = function(status, response) {
                 <p> Country:    ${form.shipping_country()} </p>
                 </table>
             </fieldset>
+            </div>
 
             <fieldset class="checkout">
                 <legend>Credit Card Info</legend>
@@ -101,7 +107,7 @@ var stripeResponseHandler = function(status, response) {
 
               <div class="form-row">
                 <label>
-                  <span>Expiration (MM/YYYY)</span>
+                  <span>Expiration (MM/YY)</span>
                   <input type="text" size="2" data-stripe="exp-month"/>
                 </label>
                 <span> / </span>

@@ -14,7 +14,7 @@
 
         <p>Quantity: <input type="number" name="quantity" value=1 /> </p>
 
-        <p>Price: <b>${product.price}</b></p>
+        <p>Price: <b>₦${product.price}</b></p>
 
         <p> <b>Product Description:</b> </p>
         <p> ${product.description}</b></p>
