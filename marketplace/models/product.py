@@ -79,7 +79,7 @@ class Product(Base):
     @classmethod
     def by_where(cls,query):
         query = "%"+query+"%"
-        return DBSession.query(Product).filter(Product.name.like(query)).order_by(sa.desc(Product.created_at)).all()
+        return DBSession.query(Product).filter(Product.name.ilike(query)).order_by(sa.desc(Product.created_at)).all()
 
     @property
     def slug(self):
