@@ -4,10 +4,11 @@
 
 <div class="span5"> <!--  Content-->
     <div class="input-group">
-<table class="table-striped" width="100%" cellpadding="5" cellspacing="5" summary="Your Shopping Cart" id="shopping_cart">
+<table class="table-striped" width="100%" cellpadding="10" cellspacing="10" summary="Your Shopping Cart" id="shopping_cart">
 		<caption>Your Shopping Cart</caption>
 		<thead >
 			<tr>
+			    <th scope="col">Image</th>
 				<th scope="col">Product</th>
 				<th scope="col">Price</th>
 				<th scope="col">Quantity</th>
@@ -18,11 +19,11 @@
 		</thead>
 		<tfoot>
 			<tr>
-				<th class="right" colspan="5">
-					Cart Subtotal:
+				<th class="right" colspan="6">
+					Shopping Cart Subtotal:
 				</th>
 				<th class="right">
-                    ${cart_subtotal}
+                    ₦${cart_subtotal}
 				</th>
 			</tr>
 			% if cart_items:
@@ -44,10 +45,11 @@
 				<tr>
 					<td>
 						<a href="${request.route_url('product', id=item.product.id, slug=item.product.slug)}" class="cart">
-							${ item.product.name }
+							<img src="${ item.product.image }" width="140" height="140" />
 						</a>
 					</td>
-					<td>${ item.product.price }</td>
+					<td>${ item.product.name }</td>
+					<td>₦${ item.product.price }</td>
 					<td>
 						<form method="post" action="${request.route_url('cart')}">
 							<input type="text" name="quantity" value="${ item.quantity }" id="quantity" size="2" class="quantity" maxlength="5" />
@@ -63,7 +65,7 @@
 							<input type="submit" name="submit" value="Remove"/>
 						</form>
 					</td>
-					<td class="right">${ item.total }</td>
+					<td class="right">₦${ item.total }</td>
 				</tr>
 			% endfor 
 		% else:

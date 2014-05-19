@@ -15,11 +15,11 @@
 </div> <!-- End of Content -->
 <!-- Product Results-->
 <div class="span5"> 
-    <h1 class="left">Product Results</h1>
+    <h1 class="left">Product Results for ${query} </h1>
     <ul class="nav nav-pills nav-stacked">
      % for product in products:
    <li> <p><b>${product.name}</b> <a href="${request.route_url('product', id=product.id, slug=product.slug)}">
-   <img src="${product.image}" height="100" />
+   <img src="${product.image}" width="140" height="140" />
    </a></p>
     </li>
     % endfor

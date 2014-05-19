@@ -49,31 +49,12 @@ def main(argv=sys.argv):
 
         pic_dir = settings['picture_directory']
 
-#hess-ecabernet-sauvignan-1.jpg
-#mangan.jpg
-#barbie-cake.jpg
-#soccer-cake.jpg
-#dummy-cake-ben10-2.jpg
-#edna-cabernet-sauvignan.jpg
-#Eminence.jpg
-#hatteras-red.jpg
-
-#SAM_0091 copy.jpg
-#SAM_0110 copy.jpg
-# SAM_0111 copy.jpg
-#speaker.JPG
-#Ikeja-20130430-00289.jpg
-
-
-
         product_1 = Product(name="Hess Cabernet Sauvignan", brand="Baker's World", sku="12321323", price=3400, is_active=True, quantity=None,
                             description="Hess ECabernet Sauvignan", image=pic_dir+"hess-ecabernet-sauvignan-1.jpg", categories=[category1])
         product_2 = Product(name="Edna Cabernet Sauvignan", brand="Baker's World", sku="4343243243", price=3200, is_active=True, quantity=None,
                             description="Edna Cabernet Sauvignan", image=pic_dir+"edna-cabernet-sauvignan.jpg", categories=[category1])
         product_3 = Product(name="Hatteras Red", brand="Baker's World", sku="555232323", price=3400, is_active=True, quantity=None,
                             description="Wine", image=pic_dir+"hatteras-red.jpg", categories=[category1])
-        product_4 = Product(name="Eminence", brand="Baker's World", sku="3432432431", price=2100, is_active=True, quantity=None,
-                            description="Eminence Wine", image=pic_dir+"Eminence.jpg", categories=[category1])
         product_5 = Product(name="Mangan Wine", brand="Baker's World", sku="59032332", price=4000, is_active=True, quantity=None,
                             description="Mangan Wine", image=pic_dir+"mangan.jpg", categories=[category1])
         product_6 = Product(name="Soccer Cake", brand="Baker's World", sku="645435433", price=3000, is_active=True, quantity=None,
@@ -94,6 +75,6 @@ def main(argv=sys.argv):
                             description="Blue Portable Speaker", image=pic_dir+"speaker.jpg", categories=[category3])
         product_14 = Product(name="Standard Bank Portable Power", brand="Baker's World", sku="43432432431", price=2100, is_active=True, quantity=None,
                             description="Standard Bank Portable Power", image=pic_dir+"Ikeja-20130430-00289.jpg", categories=[category3])
-        products = [product_1, product_2, product_3, product_4, product_5, product_6, product_7, product_8, product_9]
+        products = [product_1, product_2, product_3, product_5, product_6, product_7, product_8, product_9]
         products.extend([product_10, product_11, product_12, product_13, product_14])
         DBSession.add_all(products)

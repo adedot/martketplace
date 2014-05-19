@@ -529,6 +529,10 @@ header form input, header form button{
 	margin-left:-15px;
 }
 
+table,th,td
+{
+border:1px solid silver;
+}
 .tab-pane ul{
 	margin:0px;
 	margin-left:25px;

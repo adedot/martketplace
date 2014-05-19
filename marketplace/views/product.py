@@ -153,4 +153,4 @@ class ProductViews(object):
 
         form = SearchForm()
 
-        return {'form':form, 'title': "Search", 'products' :products }
+        return {'form':form, 'title': "Search", 'query': query, 'products' :products }
