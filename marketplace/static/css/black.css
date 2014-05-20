@@ -155,8 +155,45 @@ border:1px solid #141D21;
 	background: #141D21;
 }
 
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background: #141D21;
+}
+
 /* Footer */
 
-footer{
-	border-top: 4px solid #141D21;
+#footer > .container {
+
+  padding-right: 15px;
+  padding-left: 15px;
 }
+
+.container .text-muted {
+  margin: 20px 0;
+}
+
+/*
+.btn-large {
+    background: #B22222;
+    background-border: #B22222;
+}
+*/

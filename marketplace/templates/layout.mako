@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="${request.static_url('marketplace:static/css/sidebar-nav.css')}">
     <!-- Check navbar -->
     <link rel="stylesheet" href="${request.static_url('marketplace:static/css/style.css')}">
-    <link rel="stylesheet" href="${request.static_url('marketplace:static/css/red.css')}">
+    <link rel="stylesheet" href="${request.static_url('marketplace:static/css/black.css')}">
       <!-- JS -->
     <script src="http://code.jquery.com/jquery.js"></script>
     <!-- Bootstrap 3 -->
@@ -139,11 +139,11 @@
 </div>
 
 <!-- Footer starts -->
-<footer>
-  <div class="container">
-  <div class="clearfix"></div>
-  </div>
-</footer>
+<div id="footer">
+      <div class="container">
+        <p class="text-muted">© 2014 Ade Labs </p>
+      </div>
+    </div>
 
 <!-- Footer ends -->
 
