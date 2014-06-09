@@ -46,7 +46,7 @@ class Product(Base):
 
 
 
-    def __init__(self, name, brand="", sku="", price=0.0, old_price=0.0, is_active =True, is_bestseller =True ,
+    def __init__(self, name="", brand="", sku="", price=0.0, old_price=0.0, is_active =True, is_bestseller =True ,
                  is_featured=None, quantity = None, description = None, meta_keywords =None, meta_description = None,
                  created_at = datetime.datetime.now(), updated_at = datetime.datetime.now(), image = None,
                  categories=[]):
