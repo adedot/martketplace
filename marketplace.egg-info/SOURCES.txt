@@ -3,6 +3,7 @@ MANIFEST.in
 README.txt
 alembic.ini
 braintree_sanbox_credit_card_info.txt
+develop-heroku.ini
 development-aws.ini
 development-do.ini
 development.ini
@@ -156,6 +157,7 @@ marketplace/static/img/product/nystatin.jpg
 marketplace/static/img/product/soccer-cake.jpg
 marketplace/static/img/product/speaker.jpg
 marketplace/static/img/product/tylenol-now.jpg
+marketplace/static/img/product/vitamand.jpg
 marketplace/static/img/product/vitaminc300.jpg
 marketplace/static/img/product/vitamind.jpg
 marketplace/static/img/social/facebook.png

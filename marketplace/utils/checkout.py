@@ -10,7 +10,7 @@ from marketplace.models import DBSession
 from datetime import datetime
 
 # Create stripe keys
-stripe.api_key = "sk_test_AP2VBnLI89bwW8K41ZmYqBHx"
+stripe.api_key = "your key"
 
 
 def process(request, order):
