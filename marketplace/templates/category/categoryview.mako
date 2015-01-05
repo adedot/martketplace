@@ -19,7 +19,7 @@
     <ul class="nav nav-pills nav-stacked">
      % for product in products:
    <li> <p><b>${product.name}</b> <a href="${request.route_url('product', id=product.id, slug=product.slug)}">
-   <img src="${product.image}" width="140" height="140" />
+   <img src="${request.static_url(product.image)}" width="140" height="140" />
    </a></p>
     </li>
     % endfor

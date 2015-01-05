@@ -45,7 +45,7 @@
 				<tr>
 					<td>
 						<a href="${request.route_url('product', id=item.product.id, slug=item.product.slug)}" class="cart">
-							<img src="${ item.product.image }" width="140" height="140" />
+							<img src="${request.static_url(item.product.image)}" width="140" height="140" />
 						</a>
 					</td>
 					<td>${ item.product.name }</td>

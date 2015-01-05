@@ -6,7 +6,7 @@
     <div class="input-group">
         <form action="${request.route_url('product', id=product.id, slug=product.slug)}" method="post">
         <p>
-        <img src="${product.image}" width="280" height="280" />
+        <img src="${request.static_url(product.image)}" width="280" height="280" />
         </p>
         <p>Name: <b>${product.name}</b></p>
         <p>Brand: <b>${product.brand}</b></p>
@@ -17,7 +17,7 @@
         <p>Price: <b>₦${product.price}</b></p>
 
         <p> <b>Product Description:</b> </p>
-        <p> ${product.description}</b></p>
+        <p> ${product.description}</p>
 
         %if product.categories:
         <p> <b> Categories </b></p>

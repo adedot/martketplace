@@ -29,7 +29,7 @@ def main(global_config, **settings):
     config.add_route('favicon.ico', '/favicon.ico')
     # Serves static directory (ie. css, js, bootstrap, etc)
     config.add_static_view('static', 'static', cache_max_age=3600)
-    config.add_static_view(pic_dir,pic_dir)
+    #config.add_static_view(pic_dir,pic_dir)
 
     # Serves up home page
     config.add_route('home', '/')
